@@ -16,7 +16,7 @@ Agente de IA diseñado para optimizar y resolver consultas sobre operaciones de 
        width="683" 
        style="max-width: 100%; border-radius: 10px;">
   <figcaption>
-    <br><a href="https://curriculum.joseazocar.pro">🔗 Versión en vivo</a>
+    <br><a href="#">🔗 Versión en vivo</a>
   </figcaption>
 </figure>
 
