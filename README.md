@@ -15,7 +15,7 @@ Agente diseñado mediante el procesamiento del lenguaje natural para optimizar y
 </div>
 
 <div align="right">
-  <br><a href="#">🔗 Explorar el Deploy.</a><br>
+  <br><a href="#">🔗 Explorar el Deploy</a><br>
 </div>
 
 ---
