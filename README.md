@@ -17,10 +17,28 @@ Agente diseñado mediante el procesamiento del lenguaje natural para optimizar y
 </div>
 
 <div align="right">
-  <br>🔗 <a href="#">Explorar Deploy</a><br>
+  <p><br>🔗 <a href="#">Explorar Deploy</a></p>
 </div>
 
 ---
 
 ## 📖 Tabla de Contenidos
+
+- [🛠 Cronograma de Desarrollo](#cronograma-de-desarrollo)
+
+---
+
+## Cronograma de Desarrollo
+
+1. **Inicialización**: La fase inicial comprende la creación del repositorio en **GitHub**, la asignación de la licencia (**MIT**) para la gestión de los términos de uso del código y la configuración del entorno virtual de **Python**.
+
+2. **Preparación de los Datos Base**: Previo a la integración de inteligencia artificial, se requiere el procesamiento de la información. En esta etapa se implementan scripts con **PyPDF** para la extracción de texto desde manuales marítimos, y se utiliza **Pandas** para la limpieza y estructuración de inventarios, manifiestos de carga o bases de datos logísticas.
+
+3. **Configuración del Motor (LLM)**: Tras la preparación de los datos, se procede a la configuración del modelo de lenguaje. Esto incluye la conexión a la API de **NVIDIA Build**, la gestión y prueba de tokens, la selección del modelo pertinente y la verificación de su correcto funcionamiento.
+
+4. **Desarrollo de la Lógica (Cadenas base)**: Mediante el uso de **LangChain**, se diseñan los *prompts*, se configura la memoria a corto plazo y se generan los *embeddings* (vectorización de archivos PDF). Asimismo, se implementa la arquitectura **RAG** para habilitar la recuperación de información desde documentos locales, garantizando que el modelo base sus respuestas en los datos provistos.
+
+5. **Implementación del Agente (Flujos con Estado)**: La etapa final integra el sistema RAG construido en el paso anterior con **LangGraph** para establecer un sistema autónomo. Se diseña un flujo de trabajo cíclico que permite al agente evaluar la precisión de las respuestas obtenidas, determinar la necesidad de utilizar herramientas adicionales o ejecutar nuevas iteraciones de búsqueda en la base documental.
+
+---
 
