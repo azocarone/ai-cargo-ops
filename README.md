@@ -24,11 +24,11 @@ Agente diseñado mediante el procesamiento del lenguaje natural para optimizar y
 
 ## 📖 Tabla de Contenidos
 
-- ⚑ [Cronograma de Desarrollo](#-cronograma-de-desarrollo)
+- ⚑ [Roadmap de Desarrollo](#-roadmap-de-desarrollo)
 
 ---
 
-## ⚑ Cronograma de Desarrollo
+## ⚑ Roadmap de Desarrollo
 
 1. **Inicialización**: La fase inicial comprende la creación del repositorio en **GitHub**, la asignación de la licencia (**MIT**) para la gestión de los términos de uso del código y la configuración del entorno virtual de **Python**.
 
