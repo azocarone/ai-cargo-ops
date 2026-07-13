@@ -1,5 +1,11 @@
 ## Planteamiento del Sistema
 
+<div align="center">
+  <img src="../assets/img/sistema_multi_agente_exportacion_especializada.png" alt="Sistena Multi-Agente DEPORCA: Inteligencia Especializada en Exportación" width="95%" height="95%" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+</div>
+
+---
+
 El enfoque radica en el desarrollo de un sistema de **multi-agentes**, ya que permitirá una especialización profunda basada en la documentación de **DEPORCA**:
 
 - "Manual de Normas y Procedimientos de Exportación"
