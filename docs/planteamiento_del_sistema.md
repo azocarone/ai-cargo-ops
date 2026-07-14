@@ -8,15 +8,15 @@
 
 El enfoque radica en el desarrollo de un sistema de **multi-agentes**, ya que permitirá una especialización profunda basada en la documentación de **DEPORCA**:
 
-- "Manual de Normas y Procedimientos de Exportación"
-- "Tarifario de Exportación"
-- "Sección Base de Preguntas y Respuestas"
+- [Manual de Normas y Procedimientos de Exportación](../assets/manual_normas_procedimientos_exportacion.pdf)
+- [Tarifario de Exportación](../assets/tarifario_exportacion.pdf)
+- [Sección Base de Preguntas y Respuestas](../assets/seccion_base_preguntas_respuestas.pdf)
 
 En un ecosistema multi-agente para las "Consultas de Operaciones y Logística Marítima de **DEPORCA**", la estructura funcionará bajo una jerarquía coordinada:
 
 1. **Agente Orquestador (Enrutamiento de Casos)**
 
-    Su función no es responder la duda, sino **identificar la intención** del usuario y delegar el caso al especialista correspondiente. Su salida incluirá los **nombres de los agentes especialistas**.
+    Su función no es responder la duda, sino **identificar la intención** del usuario y delegar el caso a los agentes especialistas correspondiente. Su salida incluirá los **nombres de los agentes especializados**.
 
     - **Ejemplo:** Si un cliente pregunta por el costo de un flete y una duda sobre el precinto, el "Orquestador" divide la consulta y activa los agentes relacionados con el caso.
 
