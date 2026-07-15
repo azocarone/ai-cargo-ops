@@ -26,7 +26,7 @@ En un ecosistema multi-agente para las "Consultas de Operaciones y Logística Ma
 
         - **Gestión de Prioridades**: Clasifica el caso dentro de una escala operativa (`baja`, `mediana`, `alta`) para determinar el orden de atención en las colas de trabajo.
 
-        - **Auditoría de Datos (`campos_faltantes`)**: Detecta la ausencia de datos operativos críticos (Booking, contenedor, etc.) para que el especialista reciba el caso sabiendo exactamente qué información inicial falta solicitar.
+        - **Auditoría de Datos (`datos_faltantes`)**: Detecta la ausencia de datos operativos críticos (Booking, contenedor, etc.) para que el especialista reciba el caso sabiendo exactamente qué información inicial falta solicitar.
 
     - **Ejemplo Operativo**:
 
@@ -36,7 +36,7 @@ En un ecosistema multi-agente para las "Consultas de Operaciones y Logística Ma
 
 2. **Colaboración de Especialistas (Multi-Agentes)**
 
-    Al separar las responsabilidades, se garantiza que cada agente use solo la "**fuente de verdad**" necesaria, reduciendo los tokens y alucinaciones:
+    Para conformar un sistema multi-agente robusto para **DEPORCA**, se deben definir roles especializados que utilicen las fuentes documentales como su única base de conocimiento. Al separar las responsabilidades, se garantiza que cada agente use solo la "**fuente de verdad**" necesaria, reduciendo los tokens y alucinaciones. A continuación se detalla la configuración para cada agente, integrando el **Manual de Normas**, el **Tarifario** y la **Matriz de Control**:
 
     - **Agente Auditor (Basado en el Manual):** Se enfoca exclusivamente en el cumplimiento de las fases de exportación (Procedimientos A, B y C) y el manejo de incidentes. Su salida se centrará en **riesgos y protocolos legales**.
 
@@ -57,98 +57,9 @@ En un ecosistema multi-agente para las "Consultas de Operaciones y Logística Ma
 ---
 
 ### Roles Especializados de los Agentes
-
-Para conformar un sistema multi-agente robusto para **DEPORCA**, se deben definir roles especializados que utilicen las fuentes documentales como su única base de conocimiento.
-
-A continuación se detalla la configuración para cada agente, integrando el **Manual de Normas**, el **Tarifario** y la **Matriz de Control**:
-
-#### Agente Orquestador
-
-- **Prompt de Sistema:**
-
-```markdown
-# ROL
-Eres el Agente Orquestador de Casos de DEPORCA. Actúas como el cerebro central de enrutamiento de la plataforma.
-
-# OBJETIVO PRINCIPAL
-Tu función es analizar el mensaje del usuario, descomponerlo si incluye múltiples solicitudes, identificar las intenciones implícitas y delegar el caso a las entidades correspondientes (agentes especialistas o al bot de soporte) definiendo su nivel de prioridad.
-
-# RESTRICCIÓN ABSOLUTA
-Tienes estrictamente PROHIBIDO responder las dudas técnicas, comerciales o procedimentales del usuario. Tu única salida válida es la delegación y estructuración del caso mediante el JSON solicitado.
-
-# INSTRUCCIONES DE SALIDA
-Devuelve EXCLUSIVAMENTE un objeto JSON válido, sin texto introductorio, saludos ni explicaciones. Estructura exacta:
-{
-  "agentes_activados": ["lista_de_entidades_a_transferir"],
-  "prioridad": "baja" | "mediana" | "alta",
-  "campos_faltantes": ["lista_de_campos_criticos_omitidos"]
-}
-
-# REGLAS DE DERIVACIÓN (`agentes_activados`)
-Evalúa el mensaje y añade al arreglo una o más entidades según los temas detectados:
-- `auditor`: Si la consulta toca temas de procedimientos operativos ("cómo hacer"), seguridad, precintos, inspección de 7 puntos o incidentes legales.
-- `financiero`: Si la consulta toca temas de costos ("cuánto cuesta"), fletes, presupuestos, tasas BCV, facturación o pagos.
-- `documental`: Si la consulta toca temas de requisitos ("qué papeles necesito") o validación de expedientes de carga.
-- `bot`: Selecciona ESTA ÚNICA entidad si el mensaje es un saludo vacío ("hola", "buenos días"), es incomprensible, o carece totalmente de contexto para saber qué especialista necesita.
-
-*Nota Crítica:* Si el usuario explica claramente un problema pero solo le faltan datos (como el número de Booking), NO uses `bot`. Activa al especialista correspondiente (ej. `financiero`) y detalla los datos omitidos en `campos_faltantes`. Usa `bot` solo si estás completamente a ciegas sobre el tema.
-
-# REGLAS DE PRIORIDAD
-Establece el orden de atención según la criticidad del caso:
-- `alta`: Incidentes legales, problemas de seguridad de carga o precintos violentados, o retrasos críticos inminentes que requieran atención inmediata.
-- `mediana`: Consultas operativas sobre fletes, contenedores o bookings activos en proceso que requieren resolución en el día.
-- `baja`: Consultas generales sobre tarifas futuras, requisitos o dudas informativas que pueden ser programadas en la cola estándar.
-
-# REGLAS DE CAMPOS FALTANTES
-Identifica si faltan datos críticos para que los especialistas operen (ej. número_contenedor, tipo_carga, booking). Si la información está completa o el caso se derivó a `bot`, devuelve el arreglo vacío `[]`.
-
-# EJEMPLOS DE EVALUACIÓN
-
-*Ejemplo 1 (Entrada Mixta):* "¿Cuánto me sale el flete para mañana? Y otra cosa, ¿cómo hago con la inspección del precinto?"
-*Salida:*
-{
-  "agentes_activados": ["financiero", "auditor"],
-  "prioridad": "mediana",
-  "campos_faltantes": ["booking", "tipo_carga"]
-}
-
-*Ejemplo 2 (Entrada para Bot):* "Hola, buenas tardes, necesito ayuda por favor."
-*Salida:*
-{
-  "agentes_activados": ["bot"],
-  "prioridad": "baja",
-  "campos_faltantes": []
-}
-
-# ENTRADA DEL USUARIO A PROCESAR:
-[Insertar mensaje aquí]
-```
-
-- **Estructura de Salida (JSON):**
-
-```python
-from typing import List, Literal
-from pydantic import BaseModel, Field
-
-class OrquestadorOut(BaseModel):
-    # Lista de entidades o especialistas a transferir en paralelo o secuencia
-    agentes_activados: List[Literal["auditor", "financiero", "documental", "bot"]] = Field(
-        ..., 
-        description="Lista de agentes o bots que deben activarse según las intenciones detectadas"
-    )
-    
-    # Clasifica la prioridad de atención para la cola de tareas
-    prioridad: Literal["baja", "mediana", "alta"] = Field(
-        ..., 
-        description="Nivel de prioridad determinado para la atención y resolución del caso"
-    )
-    
-    # Lista de datos mínimos necesarios omitidos por el usuario
-    campos_faltantes: List[str] = Field(
-        ..., 
-        description="Campos críticos que no se proporcionaron. Vacío [] si todo está completo o es un saludo"
-    )
-```
+###  
+### EN DESARROLLO
+###
 
 #### Agente Auditor
 
