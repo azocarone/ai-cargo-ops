@@ -12,6 +12,8 @@ El enfoque radica en el desarrollo de un sistema de **multi-agentes**, ya que pe
 - [Tarifario de Exportación](../assets/tarifario_exportacion.pdf)
 - [Sección Base de Preguntas y Respuestas](../assets/seccion_base_preguntas_respuestas.pdf)
 
+---
+
 En un ecosistema multi-agente para las "Consultas de Operaciones y Logística Marítima de **DEPORCA**", la estructura funcionará bajo una jerarquía coordinada:
 
 ### 1. Agente Orquestador (Orquestador de Casos y Enrutamiento Paralelo)
