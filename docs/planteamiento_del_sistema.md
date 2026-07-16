@@ -14,92 +14,79 @@ El enfoque radica en el desarrollo de un sistema de **multi-agentes**, ya que pe
 
 En un ecosistema multi-agente para las "Consultas de Operaciones y Logística Marítima de **DEPORCA**", la estructura funcionará bajo una jerarquía coordinada:
 
-1. **Agente Orquestador (Orquestador de Casos y Enrutamiento Paralelo):**
+### 1. Agente Orquestador (Orquestador de Casos y Enrutamiento Paralelo)
 
-    - **Misión Central**: Actuar como el cerebro de distribución y primera línea automatizada del sistema. Su función es estrictamente analítica: descompone el mensaje del usuario, identifica todas las intenciones implícitas y delega las tareas a los canales adecuados de forma simultánea. Tiene prohibido interactuar conversacionalmente o responder dudas con el cliente.
+- **Contexto**: Cerebro de distribución y primera línea automatizada del sistema. Su función es estrictamente analítica: descompone el mensaje del usuario, identifica todas las intenciones implícitas y delega las tareas a los canales adecuados de forma simultánea. Tiene prohibido interactuar conversacionalmente o responder dudas con el cliente.
 
-    - **Capacidades Clave**:
-    
-        - **Segmentación Multitarea**: Si un mensaje contiene múltiples solicitudes (por ejemplo, el costo de un flete y una duda sobre el precinto), el Orquestador no elige una sola; divide la consulta y activa en paralelo o secuencia los nombres de las entidades correspondientes (`auditor`, `financiero`, `documental`).
+- **Mecanismo de Operación / Verdad**:
 
-        - **Filtro de Contención (`bot`)**: Si la entrada carece de contexto identificable, es un saludo o no requiere un especialista, activa la bandera `bot` para desviar la atención a un flujo conversacional automatizado de recolección de datos.
+    - **Segmentación Multitarea**: Si un mensaje contiene múltiples solicitudes (por ejemplo, el costo de un flete y una duda sobre el precinto), el Orquestador no elige una sola; divide la consulta y activa en paralelo o secuencia los nombres de las entidades correspondientes (`auditor`, `financiero`, `documental`).
 
-        - **Gestión de Prioridades**: Clasifica el caso dentro de una escala operativa (`baja`, `mediana`, `alta`) para determinar el orden de atención en las colas de trabajo.
+    - **Filtro de Contención (`bot`)**: Si la entrada carece de contexto identificable, es un saludo o no requiere un especialista, activa la bandera `bot` para desviar la atención a un flujo conversacional automatizado de recolección de datos.
 
-        - **Auditoría de Datos (`datos_faltantes`)**: Detecta la ausencia de datos operativos críticos (Booking, contenedor, etc.) para que el especialista reciba el caso sabiendo exactamente qué información inicial falta solicitar.
+    - **Gestión de Prioridades**: Clasifica el caso dentro de una escala operativa (`baja`, `mediana`, `alta`) para determinar el orden de atención en las colas de trabajo.
 
-    - **Ejemplo Operativo**:
+    - **Auditoría de Datos (`datos_faltantes`)**: Detecta la ausencia de datos operativos críticos (Booking, contenedor, etc.) para que el especialista reciba el caso sabiendo exactamente qué información inicial falta solicitar.
 
-        - **Mensaje del usuario**: "¿Cuánto me sale el flete para mañana? Y otra cosa, ¿cómo hago con la inspección del precinto?".
+- **Salida y Formato**: Retorna exclusivamente un objeto JSON estructurado que define los agentes que se deben activar, el nivel de prioridad de la consulta y la lista de campos o datos faltantes requeridos para iniciar la operación.
 
-        - **Acción del Orquestador**
+- **Ejemplo Operativo**:
 
-            ```json
-            {
-                "agentes_activados": ["financiero", "auditor"],
-                "prioridad": "mediana",
-                "datos_faltantes": ["booking", "tipo_carga"]
+    - **Mensaje del usuario**: "¿Cuánto me sale el flete para mañana? Y otra cosa, ¿cómo hago con la inspección del precinto?".
+
+    - **Salida**:
+
+        ```json
+        {
+            "agentes_activados": ["financiero", "auditor"],
+            "prioridad": "mediana",
+            "datos_faltantes": ["booking", "tipo_carga"]
+        }
+        ```
+---
+
+### 2. Colaboración de Especialistas (Multi-Agentes)
+
+Para conformar un sistema multi-agente robusto para **DEPORCA**, se deben definir roles especializados que utilicen las fuentes documentales como su única base de conocimiento. Al separar las responsabilidades, se garantiza que cada agente use solo la "**fuente de verdad**" necesaria, reduciendo los tokens y alucinaciones. A continuación se detalla la configuración para cada agente, integrando el **Manual de Normas**, el **Tarifario** y la **Matriz de Control**:
+
+#### Agente Auditor (Basado en el Manual)
+
+- **Contexto**: Especialista técnico-legal encargado de auditar y verificar el cumplimiento normativo en las tres fases de exportación (Pre-Embarque, Operación Aduanera y Post-Embarque) en la jurisdicción de la Aduana Principal de Puerto Cabello.
+
+- **Mecanismo de Operación / Verdad**: Restringido estrictamente al Manual de Exportación y sección de consultas de DEPORCA, con deslinde de responsabilidades operativas e inhabilitación para responder ante la falta de datos explícitos.
+
+- **Salida y Formato**: Retorna exclusivamente un objeto JSON estructurado (BaseModel de Pydantic) libre de texto complementario. Este objeto clasifica la consulta, define al responsable operativo de la tarea, provee el sustento normativo/legal (LOPA, COT, LOD, etc.) y encapsula un sub-objeto dinámico para la contención de riesgos que detalla acciones inmediatas y documentos requeridos ante alertas o contingencias en puerto.
+
+- **Ejemplo Operativo**:
+
+    - **Mensaje del usuario**: "¿Qué documentos integran el "Expediente Especial de Trazabilidad de Planta" en caso de una alerta antidrogas?".
+
+    - **Salida**:
+
+        ```json
+        {
+            "categoria_consulta": "Protocolo de Incidentes y Emergencias",
+            "respuesta_directa": "En caso de presentarse una alerta antidrogas (marcaje de can o irregularidades de densidad), se debe consignar de forma obligatoria el Expediente Especial de Trazabilidad de Planta para blindar jurídicamente a la empresa y demostrar que la cadena logística de origen no fue vulnerada.",
+            "responsable_operativo": "Agente de Aduanas y Representante Legal (con soporte del Supervisor de Almacén)",
+            "fase_procedimiento": "Fase de Operación Aduanera (Procedimiento B)",
+            "sustento_legal_o_normativo": [
+                "Ley Orgánica de Drogas (LOD)",
+                "Caso 6.2 del Protocolo para el Manejo de Incidentes"
+            ],
+            "protocolo_emergencia": {
+                "aplica_incidente": true,
+                "acciones_inmediatas": [
+                    "Exigir estar presentes de manera física e ininterrumpida en el Acto de Vaciado de Emergencia (Unstuffing).",
+                    "Consignar de forma inmediata el Expediente Especial de Trazabilidad ante las autoridades competentes (GNB/Dirección Antidrogas)."
+                ],
+                "documentos_requeridos": [
+                    "Copia del registro de la ruta satelital (GPS) del transporte desde la salida de la empresa hasta el puerto.",
+                    "Reporte fotográfico con marca de agua (fecha y hora) del momento exacto del cierre de las compuertas en planta.",
+                    "Bitácora de firmas del personal de seguridad interna que custodió el llenado."
+                ]
             }
-            ```
-
-2. **Colaboración de Especialistas (Multi-Agentes)**
-
-    Para conformar un sistema multi-agente robusto para **DEPORCA**, se deben definir roles especializados que utilicen las fuentes documentales como su única base de conocimiento. Al separar las responsabilidades, se garantiza que cada agente use solo la "**fuente de verdad**" necesaria, reduciendo los tokens y alucinaciones. A continuación se detalla la configuración para cada agente, integrando el **Manual de Normas**, el **Tarifario** y la **Matriz de Control**:
-
-    - **Agente Auditor (Basado en el Manual)**
-
-        - **Enfoque Principal**: Especialista técnico-legal encargado de auditar y verificar el cumplimiento normativo en las tres fases de exportación (Pre-Embarque, Operación Aduanera y Post-Embarque) en la jurisdicción de la Aduana Principal de Puerto Cabello.
-
-        - **Mecanismo de Verdad**: Restringido estrictamente al Manual de Exportación y sección de consultas de DEPORCA, con deslinde de responsabilidades operativas e inhabilitación para responder ante la falta de datos explícitos.
-
-        - **Salida y Formato**: Retorna exclusivamente un objeto JSON estructurado (BaseModel de Pydantic) libre de texto complementario. Este objeto clasifica la consulta, define al responsable operativo de la tarea, provee el sustento normativo/legal (LOPA, COT, LOD, etc.) y encapsula un sub-objeto dinámico para la contención de riesgos que detalla acciones inmediatas y documentos requeridos ante alertas o contingencias en puerto.
-
-        - **Ejemplo Operativo**:
-
-            - **Mensaje del usuario**: "¿Qué documentos integran el "Expediente Especial de Trazabilidad de Planta" en caso de una alerta antidrogas?".
-
-            - **Acción del Auditor**
-            
-                ```json 
-                {
-                    "categoria_consulta": "Protocolo de Incidentes y Emergencias",
-                    "respuesta_directa": "En caso de presentarse una alerta antidrogas (marcaje de can o irregularidades de densidad), se debe consignar de forma obligatoria el Expediente Especial de Trazabilidad de Planta para blindar jurídicamente a la empresa y demostrar que la cadena logística de origen no fue vulnerada.",
-                    "responsable_operativo": "Agente de Aduanas y Representante Legal (con soporte del Supervisor de Almacén)",
-                    "fase_procedimiento": "Fase de Operación Aduanera (Procedimiento B)",
-                    "sustento_legal_o_normativo": [
-                        "Ley Orgánica de Drogas (LOD)",
-                        "Caso 6.2 del Protocolo para el Manejo de Incidentes"
-                    ],
-                    "protocolo_emergencia": {
-                        "aplica_incidente": true,
-                        "acciones_inmediatas": [
-                            "Exigir estar presentes de manera física e ininterrumpida en el Acto de Vaciado de Emergencia (Unstuffing).",
-                            "Consignar de forma inmediata el Expediente Especial de Trazabilidad ante las autoridades competentes (GNB/Dirección Antidrogas)."
-                        ],
-                        "documentos_requeridos": [
-                            "Copia del registro de la ruta satelital (GPS) del transporte desde la salida de la empresa hasta el puerto.",
-                            "Reporte fotográfico con marca de agua (fecha y hora) del momento exacto del cierre de las compuertas en planta.",
-                            "Bitácora de firmas del personal de seguridad interna que custodió el llenado."
-                        ]
-                    }
-                }
-                ```
-
-
-
-
-
-
-
-    ---
-
-    ###  
-    ### EN DESARROLLO
-    ###
-
-    - **Agente Financiero (Basado en el Tarifario):** Se especializa en la rentabilidad, el cobro de servicios, cálculos exactos, basándose en el Tarifario de Exportación, aplicación de la tasa cambiaría del Banco Central de Venezuela (**BCV**) y verificación de que se cumpla la política de "Anticipo Obligatorio". Su salida será una **cotización estructurada**.
-
-    - **Agente Documental (Basado en la Matriz de Control):** Su única función es validar que el expediente cumpla con la lista de documentos obligatorios (Factura, Packing List, DUA, etc.) antes de autorizar el ingreso a la zona primaria portuaria.
+        }
+        ```
 
 ---
 
@@ -113,12 +100,21 @@ En un ecosistema multi-agente para las "Consultas de Operaciones y Logística Ma
 
 ---
 
+###  
+### EN DESARROLLO
+###
+
+- **Agente Financiero (Basado en el Tarifario):** Se especializa en la rentabilidad, el cobro de servicios, cálculos exactos, basándose en el Tarifario de Exportación, aplicación de la tasa cambiaría del Banco Central de Venezuela (**BCV**) y verificación de que se cumpla la política de "Anticipo Obligatorio". Su salida será una **cotización estructurada**.
+
+- **Agente Documental (Basado en la Matriz de Control):** Su única función es validar que el expediente cumpla con la lista de documentos obligatorios (Factura, Packing List, DUA, etc.) antes de autorizar el ingreso a la zona primaria portuaria.
+
+---
+
 ###
 ### Roles Especializados de los Agentes
 ###  
 ### EN DESARROLLO
 ###
-
 
 ---
 
