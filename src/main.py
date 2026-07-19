@@ -13,12 +13,13 @@ from dotenv import load_dotenv
 from modulo.gestor_rag import GestorRAG
 from modulo.agente_orquestador import AgenteOrquestador
 from modulo.agente_auditor import AgenteAuditor
+from modulo.agente_financiero import AgenteFinanciero
 from modulo.test_agentes import test_agente
 
 load_dotenv()
 
 # Leer .env, nivel de verbosidad del log, si no existe, por defecto se usa INFO.
-nivel_env = os.environ.get("LOG_LEVEL", "INFO").upper()
+nivel_env = os.environ.get("LOG_LEVEL", "INFO").upper()                                                                                                                                                                                                                                         
 
 logging.basicConfig(
     level=getattr(logging, nivel_env, logging.INFO),
@@ -37,10 +38,12 @@ def main():
         retriever_compartido = rag.inicializar_base_vectores()
 
         #agente_orquestador = AgenteOrquestador(modo_desarrollo=True)
-        agente_auditor = AgenteAuditor(retriever_compartido, modo_desarrollo=True)
+        #agente_auditor = AgenteAuditor(retriever_compartido, modo_desarrollo=True)
+        agente_financiero = AgenteFinanciero(retriever_compartido, modo_desarrollo=True)
 
         #test_agente(agente_orquestador)
-        test_agente(agente_auditor)
+        #test_agente(agente_auditor)
+        test_agente(agente_financiero)
         
     except Exception as e:
         logger.critical(f"La aplicación no pudo iniciar correctamente: {e}")

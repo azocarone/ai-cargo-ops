@@ -115,3 +115,25 @@ class AuditorAgentResponse(BaseModel):
         ...,
         description="Lista de fragmentos textuales del contexto RAG que demuestran la veracidad de los datos entregados."
     )
+
+# =====================================================================
+# ESQUEMAS DEL AGENTE FINANCIERO
+# =====================================================================
+
+class ConceptoDetalle(BaseModel):
+    concepto: str = Field(description="Nombre o descripción detallada del servicio o cargo aplicado.")
+    tarifa_base_usd: float = Field(description="Monto base cobrado por el concepto en USD. 0.0 si no aplica.")
+    unidad_cobro: str = Field(description="Unidad de medida del cobro (ej. Por Contenedor, Por Evento, Por Hora, Por Documento, N/A).")
+    observaciones: str = Field(description="Notas adicionales, excepciones o base legal interna del cobro.")
+
+class FinancieroAgentResponse(BaseModel):
+    analisis_consulta: str = Field(description="Breve razonamiento lógico y financiero basado estrictamente en el tarifario.")
+    respuesta_cliente: str = Field(description="Respuesta directa, empática y clara redactada para el cliente.")
+    desglose_costos: List[ConceptoDetalle] = Field(default=[], description="Lista de los conceptos y tarifas asociados a la consulta.")
+    politica_aplicable: Optional[str] = Field(None, description="Especificación de políticas de facturación (Anticipos, Demurrage, Pago en Bs/BCV, Almacenaje) si aplica.")
+    monto_total_estimado_usd: float = Field(description="Suma total de los cargos identificados en USD. 0.0 si es informativo.")
+
+
+
+
+
