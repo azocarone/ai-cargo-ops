@@ -3,11 +3,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub: Profile](https://img.shields.io/badge/GitHub-Profile-181717?logo=github)](https://github.com/azocarone)
 [![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)](https://www.python.org/)
-[![PyPDF](https://img.shields.io/badge/PyPDF-FF0000?style=flat)](https://pypdf.readthedocs.io/)
-[![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
 [![NVIDIA Build](https://img.shields.io/badge/NVIDIA%20Build-76B900?style=flat&logo=nvidia&logoColor=white)](https://build.nvidia.com/)
 [![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=flat&logo=langchain&logoColor=white)](https://www.langchain.com/)
 [![RAG](https://img.shields.io/badge/RAG-Retrieval%20Augmented%20Generation-8A2BE2?style=flat)](https://es.wikipedia.org/wiki/Generaci%C3%B3n_aumentada_por_recuperaci%C3%B3n)
+[![PyMuPDF](https://img.shields.io/badge/PyMuPDF-004A7C?style=flat&logo=python&logoColor=white)](https://pymupdf.readthedocs.io/)
+[![FAISS CPU](https://img.shields.io/badge/FAISS%20CPU-005A9C?style=flat&logo=meta&logoColor=white)](https://github.com/facebookresearch/faiss)
 [![LangGraph](https://img.shields.io/badge/LangGraph-1C3C3C?style=flat&logo=langchain&logoColor=white)](https://langchain-ai.github.io/langgraph/)
 
 Agente diseñado mediante el procesamiento del lenguaje natural para optimizar y resolver consultas sobre las operaciones de carga y logística marítima de la empresa, "_Almacenes y Depósitos Integrales Portuarios, C.A._" (**_DEPORCA_**):
@@ -34,7 +34,7 @@ Agente diseñado mediante el procesamiento del lenguaje natural para optimizar y
 
 2. **Configuración del Motor (LLM)**: Tras la preparación de los datos, se procede a la configuración del modelo de lenguaje. Esto incluye la conexión a la API de **NVIDIA Build**, la gestión y prueba de tokens, la selección del modelo pertinente y la verificación de su correcto funcionamiento.
 
-3. **Preparación de los Datos Base**: Previo a la integración de inteligencia artificial, se requiere el procesamiento de la información. En esta etapa se implementan scripts con **PyPDF** para la extracción de texto desde manuales marítimos, y se utiliza **Pandas** para la limpieza y estructuración de inventarios, manifiestos de carga o bases de datos logísticas.
+3. **Preparación de los Datos Base**: Previo a la integración de inteligencia artificial, se requiere el procesamiento de la información. En esta etapa se implementan scripts con **PyMuPDF** para la extracción de texto desde manuales.
 
 4. **Desarrollo de la Lógica (Cadenas base)**: Mediante el uso de **LangChain**, se diseñan los *prompts*, se configura la memoria a corto plazo y se generan los *embeddings* (vectorización de archivos PDF). Asimismo, se implementa la arquitectura **RAG** para habilitar la recuperación de información desde documentos locales, garantizando que el modelo base sus respuestas en los datos provistos.
 
