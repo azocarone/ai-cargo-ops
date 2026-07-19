@@ -1,4 +1,9 @@
-from typing import List, Literal
+"""
+JSON's Estructurados - Modelos Pydantic (BaseModel)
+"""
+
+from enum import Enum
+from typing import List, Literal, Optional
 from pydantic import BaseModel, Field
 
 # =====================================================================
@@ -30,4 +35,83 @@ class OrquestadorAgentResponse(BaseModel):
     datos_faltantes: List[str] = Field(
         ..., 
         description="Datos críticos que no se proporcionaron. Vacío [] si todo está completo o es un saludo."
+    )
+
+# =====================================================================
+# ESQUEMAS DEL AGENTE AUDITOR
+# =====================================================================
+
+# --- Enums para restringir las clasificaciones del agente ---
+
+class CategoriaConsulta(str, Enum):
+    PRE_EMBARQUE = "Procedimientos de Pre-Embarque"
+    OPERACION_ADUANERA = "Operación Aduanera"
+    POST_EMBARQUE = "Post-Embarque"
+    CONTROL_INTERNO = "Control Interno y Archivo"
+    PROTOCOLOS_EMERGENCIA = "Protocolo de Incidentes y Emergencias"
+    ESCALAR = "No Detectado / Escalar"
+
+class FaseProcedimiento(str, Enum):
+    PRE_EMBARQUE = "Fase de Pre-Embarque (Procedimiento A)"
+    OPERACION_ADUANERA = "Fase de Operación Aduanera (Procedimiento B)"
+    POST_EMBARQUE = "Fase de Post-Embarque (Procedimiento C)"
+    CONTROL_INTERNO = "Normas Generales de Control Interno"
+    NO_APLICA = "No Aplica"
+
+class ProtocoloEmergencia(BaseModel):
+    aplica_incidente: bool = Field(
+        ..., 
+        description="Indica si la consulta describe un escenario de falla, alerta o contingencia en puerto o planta."
+    )
+    acciones_inmediatas: Optional[List[str]] = Field(
+        default=None,
+        description="Pasos de emergencia ordenados cronológicamente leídos en el manual para contener el incidente."
+    )
+    documentos_requeridos: Optional[List[str]] = Field(
+        default=None,
+        description="Documentación obligatoria indicada en el manual a consignar ante las autoridades por el incidente."
+    )
+
+# --- Citas del RAG ---
+
+class CitaBaseConocimiento(BaseModel):
+    archivo_origen: str = Field(
+        ..., 
+        description="Nombre del archivo PDF de donde se extrajo la información (ej. Manual_Exportacion.pdf)."
+    )
+    texto_exacto: str = Field(
+        ..., 
+        description="Frase o fragmento textual idéntico tomado del contexto RAG que justifica la respuesta."
+    )
+
+# --- Modelos Adaptados ---
+
+class AuditorAgentResponse(BaseModel):
+    categoria_consulta: CategoriaConsulta = Field(
+        ..., 
+        description="Categoría general en la que se clasifica la consulta del usuario."
+    )
+    respuesta_directa: str = Field(
+        ..., 
+        description="Explicación detallada y profesional que responde a la pregunta basándose ÚNICAMENTE en el contexto proporcionado."
+    )
+    responsable_operativo: str = Field(
+        ..., 
+        description="Cargo encargado de la tarea. Si no se menciona explícitamente en el texto, colocar 'No especificado en manual'."
+    )
+    fase_procedimiento: FaseProcedimiento = Field(
+        ..., 
+        description="Fase exacta del flujo operativo de exportación donde se ubica el tema consultado."
+    )
+    sustento_legal_o_normativo: List[str] = Field(
+        ..., 
+        description="Leyes, providencias o secciones internas del manual mencionadas explícitamente en los textos recuperados."
+    )
+    protocolo_emergencia: ProtocoloEmergencia = Field(
+        ..., 
+        description="Sub-objeto que detalla el protocolo a seguir en caso de incidentes."
+    )
+    citas_evidencia: List[CitaBaseConocimiento] = Field(
+        ...,
+        description="Lista de fragmentos textuales del contexto RAG que demuestran la veracidad de los datos entregados."
     )
