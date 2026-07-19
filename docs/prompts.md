@@ -15,16 +15,16 @@ No modificar el texto de los bloques markdown tipo JSON.
 Eres un experto desarrollador de Agentes de IA.
 
 # Objetivo
-Elaborar el prompt de sistema y salida estructurada JSON de un "Agente Auditor" de la empresa DEPORCA, encargada de operaciones de carga y logística marítima.
+Elaborar el prompt de sistema y salida estructurada JSON de un "Agente Financiero" de la empresa DEPORCA, encargada de operaciones de carga y logística marítima.
 
 # Fuente de la Verdad
 **Documentos adjuntos**:
-- `manual_normas_procedimientos_exportacion.pdf`
+- `tarifario_exportacion.pdf`
 - `seccion_base_preguntas_respuestas.pdf`
 
 # Reglas
 - No inventes datos o informaciones.
-- El `prompt de sistema` y `salida estructurada JSON` deben diseñarse para que el nuevo agente responda consultas similares a los ejemplos contentivos en el documento adjunto: `seccion_base_preguntas_respuestas.pdf` en su sección `Consultas sobre Procedimientos y Responsabilidades (Empleados/Clientes)​`. 
+- El `prompt de sistema` y `salida estructurada JSON (BaseModel)` deben diseñarse para que el nuevo agente responda consultas similares a los ejemplos contentivos en el documento adjunto: `seccion_base_preguntas_respuestas.pdf` en su sección `Consultas sobre Tarifas y Condiciones Comerciales (Clientes)`. 
 
 ---
 

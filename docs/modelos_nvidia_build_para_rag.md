@@ -78,5 +78,4 @@ Respuesta:""")
 
 # Tu cadena de LangChain (Asumiendo que ya recuperaste tus fragmentos de la BD Vectorial)
 rag_chain = prompt | llm | StrOutputParser()
-
 ```

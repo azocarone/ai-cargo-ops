@@ -12,7 +12,7 @@ from langchain_nvidia_ai_endpoints import ChatNVIDIA
 # Obtener el logger específico de este módulo
 logger = logging.getLogger(__name__)
 
-class ConfiguracionLLMNvidia:
+class GestorLLM:
     """
     Clase encargada de inicializar y parametrizar los modelos de NVIDIA NIM
     según la estrategia RAG requerida (Desarrollo o Producción).
@@ -117,6 +117,7 @@ class ConfiguracionLLMNvidia:
 
     def obtener_llm(self) -> ChatNVIDIA:
         """Retorna la instancia del Generador (LLM) configurado."""
+        self.registrar_info()
         return self.llm
 
     def registrar_info(self):
