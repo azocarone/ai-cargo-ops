@@ -32,14 +32,14 @@ logger = logging.getLogger("main")
 
 def main():
     try:
-        # Encender y configurar el RAG global de la aplicación
+        # Configurar el RAG global de la aplicación
         rag = GestorRAG(ruta_assets="./assets")
         retriever_compartido = rag.inicializar_base_vectores()
 
         #agente_orquestador = AgenteOrquestador(modo_desarrollo=True)
-        #test_agente(agente_orquestador)
-
         agente_auditor = AgenteAuditor(retriever_compartido, modo_desarrollo=True)
+
+        #test_agente(agente_orquestador)
         test_agente(agente_auditor)
         
     except Exception as e:

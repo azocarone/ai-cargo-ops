@@ -15,10 +15,10 @@ class AgenteOrquestador:
 
         self.llm_estructurado = llm_base.with_structured_output(OrquestadorAgentResponse)
     
-    def consultar(self, pregunta_usuario: str) -> Dict[str, Any]:
+    def consultar(self, pregunta_usuario: str) -> OrquestadorAgentResponse:
         logger.info(f"Procesando nueva consulta: '{pregunta_usuario}'")
         respuesta_objeto = self.llm_estructurado.invoke([
             SystemMessage(content=PROMPT_ORQUESTADOR),
             HumanMessage(content=pregunta_usuario)
         ])
-        return respuesta_objeto.model_dump()
+        return respuesta_objeto
