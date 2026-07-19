@@ -12,6 +12,7 @@ import logging
 from dotenv import load_dotenv
 from modulo.gestor_rag import GestorRAG
 from modulo.agente_orquestador import AgenteOrquestador
+from modulo.agente_auditor import AgenteAuditor
 from modulo.test_agentes import test_agente
 
 load_dotenv()
@@ -35,8 +36,11 @@ def main():
         rag = GestorRAG(ruta_assets="./assets/")
         retriever_compartido = rag.inicializar_base_vectores()
 
-        agente_orquestador = AgenteOrquestador(modo_desarrollo=True)
-        test_agente(agente_orquestador)
+        #agente_orquestador = AgenteOrquestador(modo_desarrollo=True)
+        #test_agente(agente_orquestador)
+
+        agente_auditor = AgenteAuditor(modo_desarrollo=True)
+        test_agente(agente_auditor)
         
     except Exception as e:
         logger.critical(f"La aplicación no pudo iniciar correctamente: {e}")
