@@ -12,6 +12,7 @@ import logging
 from dotenv import load_dotenv
 from modulo.gestor_rag import GestorRAG
 from modulo.agente_orquestador import AgenteOrquestador
+from modulo.test_agentes import test_agente
 
 load_dotenv()
 
@@ -28,12 +29,10 @@ logger = logging.getLogger("main")
 
 # ---
 
-from modulo.test_agentes import test_agente
-
 def main():
     try:
         # Encender y configurar el RAG global de la aplicación
-        rag = GestorRAG(ruta_assets="../assets")
+        rag = GestorRAG(ruta_assets="./assets/")
         retriever_compartido = rag.inicializar_base_vectores()
 
         agente_orquestador = AgenteOrquestador(modo_desarrollo=True)
