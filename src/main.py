@@ -3,13 +3,14 @@ import logging
 import sys
 from dotenv import load_dotenv
 
-# 1. Esquemas y Prompts de tu módulo original
+# 1. Importaciones de soporte e infraestructura
+from modulo.gestor_rag import GestorRAG
 from modulo.esquemas import OrquestadorAgentResponse, AuditorAgentResponse, FinancieroAgentResponse
 from modulo.prompts import PROMPT_ORQUESTADOR, PROMPT_AUDITOR, PROMPT_FINANCIERO
 
-# 2. Importamos las dos subclases que aplican Polimorfismo
-from modulo.agente_rag import AgenteRAG          # Para el Auditor (Con RAG)
-from modulo.agente_directo import AgenteDirecto  # Para el Orquestador (Sin RAG)
+# 2. Importaciones de tus agentes polimórficos
+from modulo.agente_rag import AgenteRAG
+from modulo.agente_directo import AgenteDirecto
 
 
 # =====================================================================
@@ -17,14 +18,9 @@ from modulo.agente_directo import AgenteDirecto  # Para el Orquestador (Sin RAG)
 # =====================================================================
 def inicializar_entorno():
     """Carga las variables de entorno y configura el sistema de logging."""
-    # 1. Cargar el archivo .env antes de cualquier otra cosa
     load_dotenv()
 
-    # 2. Leer el nivel de verbosidad (por defecto INFO)
     nivel_env = os.environ.get("LOG_LEVEL", "INFO").upper()
-    
-    # Mapear el string del .env a las constantes numéricas de la librería logging
-    # Si ponen un nivel inválido en el .env, por seguridad cae en INFO
     niveles_validos = {
         "DEBUG": logging.DEBUG,
         "INFO": logging.INFO,
@@ -34,50 +30,41 @@ def inicializar_entorno():
     }
     nivel_logging = niveles_validos.get(nivel_env, logging.INFO)
 
-    # 3. Configurar el logging global de la aplicación
     logging.basicConfig(
         level=nivel_logging,
         format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
         handlers=[logging.StreamHandler(sys.stdout)]
     )
     
-    # Retornamos un logger para el archivo main
     return logging.getLogger("main")
 
 
 # =====================================================================
-# SIMULACIÓN DEL RETRIEVER PARA EL AGENTE RAG (MOCK)
-# =====================================================================
-class MockRetriever:
-    def invoke(self, query: str):
-        from langchain_core.documents import Document
-        return [
-            Document(
-                page_content="Normativa DEPORCA: Las auditorías se ejecutan de forma trimestral.",
-                metadata={"source": "/rutas/manuales/Manual_Auditoria_V2.pdf"}
-            )
-        ]
-
-
-# =====================================================================
-# FLUJO PRINCIPAL (MAIN)
+# FLUJO PRINCIPAL
 # =====================================================================
 def main():
-    # Inicializamos todo al arrancar y obtenemos el logger principal
+    # Inicialización del Logger de la app
     logger = inicializar_entorno()
-    logger.info("Entorno y logs inicializados correctamente.")
-    logger.info("Iniciando entorno multi-agente polimórfico...")
+    logger.info("Iniciando entorno multi-agente de producción...")
 
-    # Componentes de inicialización
-    retriever_faiss = MockRetriever()
-    modo_dev = True
+    # Evaluamos de forma segura la bandera de desarrollo
+    modo_dev = os.environ.get("MODO_DESARROLLO", "False").lower() in ("true", "1", "t")
 
     # -----------------------------------------------------------------
-    # CREACIÓN DE INSTANCIAS (Aquí se aprecia el polimorfismo)
+    # PASO 1: Inicialización del RAG Real con tu clase GestorRAG
     # -----------------------------------------------------------------
-    logger.info("Instanciando agentes desde la misma base...")
+    logger.info("Configurando el ecosistema RAG global...")
+    
+    rag = GestorRAG(ruta_assets="./assets")
+    # Genera los embeddings de NVIDIA y levanta la base vectorial FAISS en memoria
+    retriever_compartido = rag.inicializar_base_vectores()
 
-    # El Orquestador es un 'AgenteDirecto' (Usa la base común pero redefine el payload y el prompt)
+    # -----------------------------------------------------------------
+    # PASO 2: Instanciación de los Agentes mediante Polimorfismo
+    # -----------------------------------------------------------------
+    logger.info("Instanciando la jerarquía de agentes...")
+
+    # Capa Superior: Orquestador (No requiere retriever ya que hereda de AgenteDirecto)
     orquestador = AgenteDirecto(
         prompt_sistema=PROMPT_ORQUESTADOR,
         esquema_respuesta=OrquestadorAgentResponse,
@@ -85,18 +72,18 @@ def main():
         modo_desarrollo=modo_dev
     )
 
-    # El Auditor es un 'AgenteRAG' (Usa la base común pero inyecta la búsqueda en FAISS)
+    # Capa Operativa: Auditor (Requiere retriever e inyecta la lógica RAG)
     agente_auditor = AgenteRAG(
-        retriever=retriever_faiss,
+        retriever=retriever_compartido,
         prompt_sistema=PROMPT_AUDITOR,
         esquema_respuesta=AuditorAgentResponse,
         nombre_agente="Auditor",
         modo_desarrollo=modo_dev
     )
 
-    # El Auditor es un 'AgenteRAG' (Usa la base común pero inyecta la búsqueda en FAISS)
+    # Capa Operativa: Financiero (Reutiliza el mismo retriever compartido)
     agente_financiero = AgenteRAG(
-        retriever=retriever_faiss,
+        retriever=retriever_compartido,
         prompt_sistema=PROMPT_FINANCIERO,
         esquema_respuesta=FinancieroAgentResponse,
         nombre_agente="Financiero",
@@ -104,33 +91,21 @@ def main():
     )
 
     # -----------------------------------------------------------------
-    # EJECUCIÓN (Interfaz idéntica gracias al Polimorfismo)
+    # PASO 3: Ejecución de Ejemplo
     # -----------------------------------------------------------------
+    print("\n" + "="*60 + "\n   PROCESANDO FLUJO DE TRABAJO REAL\n" + "="*60)
     
-    print("\n" + "="*60 + "\n   EJECUTANDO: ORQUESTADOR (Polimorfismo Directo)\n" + "="*60)
-    pregunta_orquestador = "Quiero auditar el inventario y revisar las finanzas."
+    # 1. El orquestador atiende al usuario
+    pregunta = "Revisemos los criterios de auditoría de inventario"
+    res_orquestador: OrquestadorAgentResponse = orquestador.consultar(pregunta)
+    logger.info("Orquestador analizó con éxito la intención.")
     
-    # Llama a .consultar(). Internamente ejecuta el _preparar_payload de AgenteDirecto
-    respuesta_orq: OrquestadorAgentResponse = orquestador.consultar(pregunta_orquestador)
-    print(f"\n[Respuesta Orquestador]: {respuesta_orq}")
-
-
-    print("\n" + "="*60 + "\n   EJECUTANDO: AUDITOR (Polimorfismo RAG)\n" + "="*60)
-    pregunta_auditor = "¿Cada cuánto se hacen las auditorías?"
+    # 2. El auditor ejecuta su flujo con la base FAISS real
+    res_auditor: AuditorAgentResponse = agente_auditor.consultar(pregunta)
     
-    # Llama al MISMO método .consultar(). Internamente ejecuta el _preparar_payload de AgenteRAG
-    respuesta_aud: AuditorAgentResponse = agente_auditor.consultar(pregunta_auditor)
-    print(f"\n[Respuesta Auditor]: {respuesta_aud}")
-
-
-    print("\n" + "="*60 + "\n   EJECUTANDO: FINANCIERO (Polimorfismo RAG)\n" + "="*60)
-    pregunta_financiero = "¿Cada cuánto se hacen las auditorías?"
-        
-    # Llama al MISMO método .consultar(). Internamente ejecuta el _preparar_payload de AgenteRAG
-    respuesta_fin: FinancieroAgentResponse = agente_financiero.consultar(pregunta_financiero)
-    print(f"\n[Respuesta Financiero]: {respuesta_fin}")
-
-    logger.info("Todos los agentes respondieron correctamente.")
+    # Visualizamos los resultados de manera limpia como JSON
+    print("\n[Output Final del Auditor]:")
+    print(res_auditor.model_dump_json(indent=4))
 
 if __name__ == "__main__":
     main()
