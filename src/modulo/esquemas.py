@@ -137,7 +137,41 @@ class FinancieroAgentResponse(BaseModel):
 # ESQUEMAS DEL AGENTE DOCUMENTAL
 # =====================================================================
 
+class DocumentoDetalle(BaseModel):
+    documento: str = Field(
+        description="Nombre oficial del documento según el contexto recuperado."
+    )
+    caracter: Literal["Obligatorio", "Condicional"] = Field(
+        description="Carácter legal o normativo indicado en la documentación."
+    )
+    emisor_oficial: str = Field(
+        description="Ente, departamento o autoridad emisora especificada en el contexto."
+    )
+    estatus_presentacion: Literal["Consignado", "Faltante", "Vencido / En Riesgo", "No Aplica"] = Field(
+        description="Estado de validación del recaudo frente a la solicitud del cliente."
+    )
+    observaciones: str = Field(
+        description="Función operativa o requisito de validación indicado en la fuente."
+    )
+
 class DocumentalAgentResponse(BaseModel):
-    estatus_expediente: Literal["Apto para Transmisión", "Incompleto", "En Revisión"] = Field(description="Determina si el expediente puede ser transmitido al SIDUNEA")
-    documentos_pendientes: List[str] = Field(description="Lista de documentos que faltan según la Matriz de Control")
-    alerta_permisologia: str = Field(description="Alerta sobre vencimiento de permisos (Ej: Fitosanitarios)")
+    analisis_expediente: str = Field(
+        description="Resumen técnico de la auditoría documental identificando la fase del proceso y el hallazgo principal."
+    )
+    estatus_expediente: Literal["Apto para Transmisión / Ingreso", "Incompleto / Bloqueado", "En Riesgo de Incidencia"] = Field(
+        description="Dictamen sobre si la carga puede avanzar a la transmisión SIDUNEA o ingreso a zona primaria."
+    )
+    auditoria_documental: List[DocumentoDetalle] = Field(
+        description="Lista de objetos DocumentoDetalle con la auditoría de cada recaudo exigido por la normativa recuperada."
+    )
+    alertas_permisologia_y_riesgos: Optional[str] = Field(
+        default=None,
+        description="Alertas sobre vencimiento de permisos, discrepancias o riesgos de retención especificados en el contexto."
+    )
+    protocolo_accion_emergencia: Optional[str] = Field(
+        default=None,
+        description="Pasos exactos del protocolo de respuesta ante contingencias según el manual de procedimientos recuperado."
+    )
+    respuesta_cliente: str = Field(
+        description="Redacción profesional en primera persona del plural (DEPORCA), clara y estructurada en formato Markdown."
+    )
