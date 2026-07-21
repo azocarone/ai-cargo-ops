@@ -12,7 +12,7 @@
 
 - **financiero, auditor**: ¿Cuánto me sale el flete para mañana? Y otra cosa, ¿cómo hago con la inspección del precinto?
 
-- **documental**: ¿Qué documentos integran el 'Expediente Especial de Trazabilidad de Planta' en caso de una alerta antidrogas?
+- **auditor**: ¿Qué documentos integran el 'Expediente Especial de Trazabilidad de Planta' en caso de una alerta antidrogas?
 
 - **bot**: ¿Bajo qué jurisdicción aduanera opera exclusivamente DEPORCA?
 

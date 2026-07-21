@@ -3,12 +3,12 @@ import logging
 import sys
 from dotenv import load_dotenv
 
-# 1. Importaciones de soporte e infraestructura
+# Importaciones de soporte e infraestructura
 from modulo.gestor_rag import GestorRAG
-from modulo.esquemas import OrquestadorAgentResponse, AuditorAgentResponse, FinancieroAgentResponse, DocumentalAgentResponse
-from modulo.prompts import PROMPT_ORQUESTADOR, PROMPT_AUDITOR, PROMPT_FINANCIERO, PROMPT_DOCUMENTAL 
+from modulo.esquemas import OrquestadorAgentResponse, AuditorAgentResponse, FinancieroAgentResponse
+from modulo.prompts import PROMPT_ORQUESTADOR, PROMPT_AUDITOR, PROMPT_FINANCIERO 
 
-# 2. Importaciones de tus agentes polimórficos
+# Importaciones de agentes polimórficos
 from modulo.agente_rag import AgenteRAG
 from modulo.agente_directo import AgenteDirecto
 
@@ -47,16 +47,16 @@ def main():
     logger = inicializar_entorno()
     logger.info("Iniciando entorno multi-agente de producción...")
 
-    # Evaluamos de forma segura la bandera de desarrollo
+    # Evaluación de forma segura la bandera de desarrollo
     modo_dev = os.environ.get("MODO_DESARROLLO", "False").lower() in ("true", "1", "t")
 
     # -----------------------------------------------------------------
-    # PASO 1: Inicialización del RAG Real con tu clase GestorRAG
+    # PASO 1: Inicialización del RAG con la clase GestorRAG
     # -----------------------------------------------------------------
     logger.info("Configurando el ecosistema RAG global...")
     
     rag = GestorRAG(ruta_assets="./assets")
-    # Genera los embeddings de NVIDIA y levanta la base vectorial FAISS en memoria
+    # Genera los embeddings levanta la base vectorial FAISS en memoria
     retriever_compartido = rag.inicializar_base_vectores()
 
     # -----------------------------------------------------------------
@@ -90,15 +90,6 @@ def main():
         modo_desarrollo=modo_dev
     )
 
-    # Capa Operativa: Documental (Reutiliza el mismo retriever compartido)
-    agente_documental = AgenteRAG(
-        retriever=retriever_compartido,
-        prompt_sistema=PROMPT_DOCUMENTAL,
-        esquema_respuesta=DocumentalAgentResponse,
-        nombre_agente="Documental",
-        modo_desarrollo=modo_dev
-    )
-
     # -----------------------------------------------------------------
     # PASO 3: Ejecución de Ejemplos
     # -----------------------------------------------------------------
@@ -106,37 +97,29 @@ def main():
     
     pregunta = "¿Qué documentos integran el 'Expediente Especial de Trazabilidad de Planta' en caso de una alerta antidrogas?"
 
-    # # 1. El orquestador atiende al usuario
-    # res_orquestador: OrquestadorAgentResponse = orquestador.consultar(pregunta)
-    # logger.info("Orquestador analizó con éxito la intención.")
+    # 1. El orquestador atiende al usuario
+    res_orquestador: OrquestadorAgentResponse = orquestador.consultar(pregunta)
+    logger.info("Orquestador analizó con éxito la intención.")
 
-    # # Visualizamos los resultados de manera limpia como JSON
-    # print("\n[Output Final del Orquestador]:")
-    # print(res_orquestador.model_dump_json(indent=4))
+    # Visualización de los resultados de manera limpia como JSON
+    print("\n[Output Final del Orquestador]:")
+    print(res_orquestador.model_dump_json(indent=4))
 
-    # # 2. El auditor ejecuta su flujo con la base FAISS real
-    # res_auditor: AuditorAgentResponse = agente_auditor.consultar(pregunta)
-    # logger.info("Auditor analizó con éxito la intención.")
+    # 2. El auditor ejecuta su flujo con la base FAISS
+    res_auditor: AuditorAgentResponse = agente_auditor.consultar(pregunta)
+    logger.info("Auditor analizó con éxito la intención.")
 
-    # # Visualizamos los resultados de manera limpia como JSON
-    # print("\n[Output Final del Auditor]:")
-    # print(res_auditor.model_dump_json(indent=4))
+    # Visualización de los resultados de manera limpia como JSON
+    print("\n[Output Final del Auditor]:")
+    print(res_auditor.model_dump_json(indent=4))
 
-    # # 3. El financiero ejecuta su flujo con la base FAISS real
+    # # 3. El financiero ejecuta su flujo con la base FAISS
     # res_financiero: FinancieroAgentResponse = agente_financiero.consultar(pregunta)
     # logger.info("Financiero analizó con éxito la intención.")
     
-    # # Visualizamos los resultados de manera limpia como JSON
+    # # Visualización de los resultados de manera limpia como JSON
     # print("\n[Output Final del Financiero]:")
     # print(res_financiero.model_dump_json(indent=4))
 
-    # 4. El financiero ejecuta su flujo con la base FAISS real
-    res_documental: DocumentalAgentResponse = agente_documental.consultar(pregunta)
-    logger.info("Documental analizó con éxito la intención.")
-    
-    # Visualizamos los resultados de manera limpia como JSON
-    print("\n[Output Final del Documental]:")
-    print(res_documental.model_dump_json(indent=4))
-    
 if __name__ == "__main__":
     main()

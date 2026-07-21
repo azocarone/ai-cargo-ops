@@ -11,7 +11,7 @@ from pydantic import BaseModel, Field
 # =====================================================================
 
 class AgenteAsignado(BaseModel):
-    agente: Literal["auditor", "financiero", "documental", "bot"] = Field(
+    agente: Literal["auditor", "financiero", "bot"] = Field(
         ...,
         description="Identificador del agente especializado o bot que debe activarse."
     )
@@ -132,46 +132,3 @@ class FinancieroAgentResponse(BaseModel):
     desglose_costos: List[ConceptoDetalle] = Field(default=[], description="Lista de los conceptos y tarifas asociados a la consulta.")
     politica_aplicable: Optional[str] = Field(None, description="Especificación de políticas de facturación (Anticipos, Demurrage, Pago en Bs/BCV, Almacenaje) si aplica.")
     monto_total_estimado_usd: float = Field(description="Suma total de los cargos identificados en USD. 0.0 si es informativo.")
-
-# =====================================================================
-# ESQUEMAS DEL AGENTE DOCUMENTAL
-# =====================================================================
-
-class DocumentoDetalle(BaseModel):
-    documento: str = Field(
-        description="Nombre oficial del documento según el contexto recuperado."
-    )
-    caracter: Literal["Obligatorio", "Condicional"] = Field(
-        description="Carácter legal o normativo indicado en la documentación."
-    )
-    emisor_oficial: str = Field(
-        description="Ente, departamento o autoridad emisora especificada en el contexto."
-    )
-    estatus_presentacion: Literal["Consignado", "Faltante", "Vencido / En Riesgo", "No Aplica"] = Field(
-        description="Estado de validación del recaudo frente a la solicitud del cliente."
-    )
-    observaciones: str = Field(
-        description="Función operativa o requisito de validación indicado en la fuente."
-    )
-
-class DocumentalAgentResponse(BaseModel):
-    analisis_expediente: str = Field(
-        description="Resumen técnico de la auditoría documental identificando la fase del proceso y el hallazgo principal."
-    )
-    estatus_expediente: Literal["Apto para Transmisión / Ingreso", "Incompleto / Bloqueado", "En Riesgo de Incidencia"] = Field(
-        description="Dictamen sobre si la carga puede avanzar a la transmisión SIDUNEA o ingreso a zona primaria."
-    )
-    auditoria_documental: List[DocumentoDetalle] = Field(
-        description="Lista de objetos DocumentoDetalle con la auditoría de cada recaudo exigido por la normativa recuperada."
-    )
-    alertas_permisologia_y_riesgos: Optional[str] = Field(
-        default=None,
-        description="Alertas sobre vencimiento de permisos, discrepancias o riesgos de retención especificados en el contexto."
-    )
-    protocolo_accion_emergencia: Optional[str] = Field(
-        default=None,
-        description="Pasos exactos del protocolo de respuesta ante contingencias según el manual de procedimientos recuperado."
-    )
-    respuesta_cliente: str = Field(
-        description="Redacción profesional en primera persona del plural (DEPORCA), clara y estructurada en formato Markdown."
-    )
