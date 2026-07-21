@@ -58,6 +58,8 @@ class FaseProcedimiento(str, Enum):
     CONTROL_INTERNO = "Normas Generales de Control Interno"
     NO_APLICA = "No Aplica"
 
+# ---
+
 class ProtocoloEmergencia(BaseModel):
     aplica_incidente: bool = Field(
         ..., 
@@ -84,7 +86,7 @@ class CitaBaseConocimiento(BaseModel):
         description="Frase o fragmento textual idéntico tomado del contexto RAG que justifica la respuesta."
     )
 
-# --- Modelos Adaptados ---
+# --- 
 
 class AuditorAgentResponse(BaseModel):
     categoria_consulta: CategoriaConsulta = Field(
