@@ -132,3 +132,12 @@ class FinancieroAgentResponse(BaseModel):
     desglose_costos: List[ConceptoDetalle] = Field(default=[], description="Lista de los conceptos y tarifas asociados a la consulta.")
     politica_aplicable: Optional[str] = Field(None, description="Especificación de políticas de facturación (Anticipos, Demurrage, Pago en Bs/BCV, Almacenaje) si aplica.")
     monto_total_estimado_usd: float = Field(description="Suma total de los cargos identificados en USD. 0.0 si es informativo.")
+
+# =====================================================================
+# ESQUEMAS DEL AGENTE DOCUMENTAL
+# =====================================================================
+
+class DocumentalAgentResponse(BaseModel):
+    estatus_expediente: Literal["Apto para Transmisión", "Incompleto", "En Revisión"] = Field(description="Determina si el expediente puede ser transmitido al SIDUNEA")
+    documentos_pendientes: List[str] = Field(description="Lista de documentos que faltan según la Matriz de Control")
+    alerta_permisologia: str = Field(description="Alerta sobre vencimiento de permisos (Ej: Fitosanitarios)")
