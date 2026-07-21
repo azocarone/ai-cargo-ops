@@ -91,18 +91,24 @@ def main():
     )
 
     # -----------------------------------------------------------------
-    # PASO 3: Ejecución de Ejemplo
+    # PASO 3: Ejecución de Ejemplos
     # -----------------------------------------------------------------
     print("\n" + "="*60 + "\n   PROCESANDO FLUJO DE TRABAJO REAL\n" + "="*60)
     
+    pregunta = " ¿Cuánto me sale el flete para mañana? Y otra cosa, ¿cómo hago con la inspección del precinto?"
+
     # 1. El orquestador atiende al usuario
-    pregunta = "Revisemos los criterios de auditoría de inventario"
-    res_orquestador: OrquestadorAgentResponse = orquestador.consultar(pregunta)
-    logger.info("Orquestador analizó con éxito la intención.")
-    
+    # res_orquestador: OrquestadorAgentResponse = orquestador.consultar(pregunta)
+    # logger.info("Orquestador analizó con éxito la intención.")
+
+    # Visualizamos los resultados de manera limpia como JSON
+    # print("\n[Output Final del Orquestador]:")
+    # print(res_orquestador.model_dump_json(indent=4))
+
     # 2. El auditor ejecuta su flujo con la base FAISS real
     res_auditor: AuditorAgentResponse = agente_auditor.consultar(pregunta)
-    
+    logger.info("Auditor analizó con éxito la intención.")
+
     # Visualizamos los resultados de manera limpia como JSON
     print("\n[Output Final del Auditor]:")
     print(res_auditor.model_dump_json(indent=4))

@@ -25,10 +25,23 @@ class GestorLLM:
                 "max_tokens": 1024,
                 "pausa": 0.2,
                 "descripcion": "Llama 3.1 8B - RAG Rápido, económico e ideal para pruebas de lógica y prompts.",
-                "extra_args": {}
+                # Para pruebas de lógica del orquestador en desarrollo, fuerza el cero aquí también si es necesario
+                "extra_args": {"temperature": 0.0} 
             }
         },
         "PRODUCCION": {
+            # ---- NUEVO PERFIL PARA TU ORQUESTADOR ----
+            "ORQUESTADOR_ESTRICTO": {
+                "nombre": "nvidia/llama-3.3-nemotron-super-49b-v1.5", # O Llama-3.1-70b
+                "max_tokens": 1024, # Un enrutador no necesita 4k tokens, respuestas cortas ahorran dinero
+                "pausa": 0.5,
+                "descripcion": "Optimizado para enrutamiento, clasificación y extracción de variables sin variaciones.",
+                "extra_args": {
+                    "temperature": 0.0,  # <-- DETERMINISMO ABSOLUTO
+                    "top_p": 0.01        # <-- Bloquea la aleatoriedad de los tokens
+                }
+            },
+            # ----------------------------------------
             "NVIDIA_RAG": {
                 "nombre": "nvidia/llama-3.3-nemotron-super-49b-v1.5",
                 "max_tokens": 4096,

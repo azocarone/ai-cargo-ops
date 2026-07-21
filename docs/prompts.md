@@ -29,7 +29,3 @@ Elaborar el prompt de sistema y salida estructurada JSON de un "Agente Financier
 ---
 
 Basado en el **documento adjunto**, analizar el **planteamiento del sistema** con la finalidad de verificar si los **prompts de sistemas** y las **salidas estructuradas** están correctamente planteados.
-
----
-
-
