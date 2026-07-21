@@ -95,7 +95,7 @@ def main():
     # -----------------------------------------------------------------
     print("\n" + "="*60 + "\n   PROCESANDO FLUJO DE TRABAJO REAL\n" + "="*60)
     
-    pregunta = "¿Qué documentos integran el 'Expediente Especial de Trazabilidad de Planta' en caso de una alerta antidrogas?"
+    pregunta = "Hola, requiero exportar 3 contenedores en un mismo booking desde Valencia hacia el puerto. Además, uno de ellos tiene una factura con 5 ítems de clasificación arancelaria compleja. ¿Cuánto me costaría el agenciamiento, la DUA y el transporte? ¿Puedo pagar en bolívares?"
 
     # 1. El orquestador atiende al usuario
     res_orquestador: OrquestadorAgentResponse = orquestador.consultar(pregunta)
@@ -105,21 +105,21 @@ def main():
     print("\n[Output Final del Orquestador]:")
     print(res_orquestador.model_dump_json(indent=4))
 
-    # 2. El auditor ejecuta su flujo con la base FAISS
-    res_auditor: AuditorAgentResponse = agente_auditor.consultar(pregunta)
-    logger.info("Auditor analizó con éxito la intención.")
+    # # 2. El auditor ejecuta su flujo con la base FAISS
+    # res_auditor: AuditorAgentResponse = agente_auditor.consultar(pregunta)
+    # logger.info("Auditor analizó con éxito la intención.")
 
-    # Visualización de los resultados de manera limpia como JSON
-    print("\n[Output Final del Auditor]:")
-    print(res_auditor.model_dump_json(indent=4))
-
-    # # 3. El financiero ejecuta su flujo con la base FAISS
-    # res_financiero: FinancieroAgentResponse = agente_financiero.consultar(pregunta)
-    # logger.info("Financiero analizó con éxito la intención.")
-    
     # # Visualización de los resultados de manera limpia como JSON
-    # print("\n[Output Final del Financiero]:")
-    # print(res_financiero.model_dump_json(indent=4))
+    # print("\n[Output Final del Auditor]:")
+    # print(res_auditor.model_dump_json(indent=4))
+
+    # 3. El financiero ejecuta su flujo con la base FAISS
+    res_financiero: FinancieroAgentResponse = agente_financiero.consultar(pregunta)
+    logger.info("Financiero analizó con éxito la intención.")
+    
+    # Visualización de los resultados de manera limpia como JSON
+    print("\n[Output Final del Financiero]:")
+    print(res_financiero.model_dump_json(indent=4))
 
 if __name__ == "__main__":
     main()

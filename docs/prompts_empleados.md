@@ -33,3 +33,20 @@ Elaborar el prompt de sistema y salida estructurada JSON de un "Agente Financier
 ---
 
 Basado en el **documento adjunto**, analizar el **planteamiento del sistema** con la finalidad de verificar si los **prompts de sistemas** y las **salidas estructuradas** están correctamente planteados.
+
+---
+
+# ROL
+Experto en redacción en idioma Español y desarrollador de Agentes de IA con Python.
+
+# OBJETIVO
+Inferir la conceptualización del "Agente Orquestador", basandote en el analisis del "Prompt de Sistema'" y la "Salida Estructurada Pydantic BaseModel".
+
+# REGLAS
+1. Los puntos a tratar en la conceptualización deben ser los siguientes:
+- Contexto
+- Mecanismos de operación
+- Ejemplo de estructura de datos JSON 
+2. La redacción debe ser del tipo "resumen ejecutivo", pero con un enfoque tecnico con la finalidad de que le sirva de documentación de apoyo de los requerimientos de la implementación del proyecto,
+
+Adjunto prompt y estructura pydantic:
