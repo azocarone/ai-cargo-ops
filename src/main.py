@@ -106,12 +106,21 @@ def main():
     # print(res_orquestador.model_dump_json(indent=4))
 
     # 2. El auditor ejecuta su flujo con la base FAISS real
-    res_auditor: AuditorAgentResponse = agente_auditor.consultar(pregunta)
-    logger.info("Auditor analizó con éxito la intención.")
+    # res_auditor: AuditorAgentResponse = agente_auditor.consultar(pregunta)
+    # logger.info("Auditor analizó con éxito la intención.")
 
     # Visualizamos los resultados de manera limpia como JSON
-    print("\n[Output Final del Auditor]:")
-    print(res_auditor.model_dump_json(indent=4))
+    # print("\n[Output Final del Auditor]:")
+    # print(res_auditor.model_dump_json(indent=4))
+
+    # 3. El financiero ejecuta su flujo con la base FAISS real
+    res_financiero: FinancieroAgentResponse = agente_financiero.consultar(pregunta)
+    logger.info("Financiero analizó con éxito la intención.")
+    
+    # Visualizamos los resultados de manera limpia como JSON
+    print("\n[Output Final del Financiero]:")
+    print(res_financiero.model_dump_json(indent=4))
+    
 
 if __name__ == "__main__":
     main()
