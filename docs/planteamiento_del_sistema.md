@@ -101,7 +101,7 @@ Para conformar un sistema multi-agente robusto para **DEPORCA**, se deben defini
 
 ---
 
-### Agente Auditor (Basado en el Manual)
+### 2.1.Agente Auditor (Basado en el Manual)
 
 #### Contexto
 
@@ -187,18 +187,15 @@ El siguiente esquema representa la serialización JSON del objeto `AuditorAgentR
 
 ---
 
-### Agente Financiero (Basado en el Tarifario)
+### 2.2. Agente Financiero (Basado en el Tarifario)
 
 #### Contexto
 
 El Agente Financiero opera como un asistente virtual especializado en **atención al cliente y cotización automatizada** de servicios logísticos, aduaneros y portuarios. Su ámbito de dominio comprende la liquidación de tarifas de exportación, la explicación de políticas comerciales y el desglose de costes operativos.
 
-* **Arquitectura Subyacente:** Generación Aumentada por Recuperación (**RAG** - *Retrieval-Augmented Generation*).
-* **Fuente de Verdad (Single Source of Truth):** Tarifario oficial de DEPORCA inyectado dinámicamente en el contexto de la sesión.
-* **Canal/Audiencia:** Clientes finales, importadores, exportadores y operadores logísticos.
-* **Principios de Gobernanza:**
-* **Anclaje estricto a datos (Groundedness):** Prohibición absoluta de usar conocimiento previo o *hardcoded* para tarifas numéricas.
-* **Manejo de Incertidumbre / Escalación:** Si una tarifa o servicio no está presente en el contexto recuperado, el agente no infiere ni calcula ficticiamente; asigna `$0.0` y remite la solicitud al Departamento Comercial.
+<div align="center">
+  <img src="../assets/img/agente_financiero.png" alt="Agente Financiero" width="45%" height="45%" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+</div>
 
 ---
 
@@ -207,8 +204,26 @@ El Agente Financiero opera como un asistente virtual especializado en **atenció
 El flujo de procesamiento del agente sigue una secuencia lógica determinista apoyada por el LLM (*Large Language Model*), garantizando trazabilidad y salidas estructuradas mediante Pydantic.
 
 <div align="center">
-  <img src="../assets/img/agente_financiero.png" alt="Agente Financiero" width="45%" height="45%" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+  <img src="../assets/img/agente_financiero_operacion.png" alt="Agente Financiero Operación" width="45%" height="45%" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
 </div>
+
+##### Reglas de Negocio Integradas
+
+1. **Lógica de Descuento por Volumen en Booking:**
+    - Contenedor $1$: Tarifa base ($350.00 USD).
+    - Contenedores $N+1$: Tarifa marginal ($150.00 USD por equipo adicional).
+
+2. **Cálculo de Clasificación Arancelaria Compleja:**
+    - Ítems $1$ al $2$: Incluidos en la tarifa base ($0.00 USD).
+    - Ítems $\ge 3$: $25.00 USD por ítem adicional (Ej: $5\text{ ítems} \rightarrow (5 - 2) \times 25 = \$75.00\text{ USD}$).
+
+3. **Manejo Multimoneda y Conversión Legal:**
+    - Moneda base de cálculo: USD.
+    - Pagos en moneda nacional (VES): Referenciados a la tasa oficial del Banco Central de Venezuela (BCV) vigente a la fecha de pago o facturación.
+
+4. **Respuesta Bicanal (Humano - Máquina):**
+    - **Para el cliente (`respuesta_cliente`):** Redacción en primera persona del plural ("En DEPORCA..."), en formato Markdown (*scannable* con negritas y viñetas).
+    - **Para auditoría/sistemas (`analisis_consulta`, `desglose_costos`):** Desglose explícito y sumatoria matemática estricta.
 
 ---
 
