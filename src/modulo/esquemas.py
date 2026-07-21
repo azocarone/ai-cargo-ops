@@ -89,31 +89,31 @@ class CitaBaseConocimiento(BaseModel):
 class AuditorAgentResponse(BaseModel):
     categoria_consulta: CategoriaConsulta = Field(
         ..., 
-        description="Categoría general en la que se clasifica la consulta del usuario."
+        description="Categoría general en la que se clasifica la consulta."
     )
     respuesta_directa: str = Field(
         ..., 
-        description="Explicación detallada y profesional que responde a la pregunta basándose ÚNICAMENTE en el contexto proporcionado."
+        description="Explicación detallada basándose ÚNICAMENTE en el contexto RAG."
     )
     responsable_operativo: str = Field(
         ..., 
-        description="Cargo encargado de la tarea. Si no se menciona explícitamente en el texto, colocar 'No especificado en manual'."
+        description="Cargo explícito mencionado en el texto que debe ejecutar o resolver la acción (ej. 'Agente de Aduanas', 'Supervisor de Almacén'). Colocar 'No especificado en manual' solo si no hay ningún cargo escrito."
     )
     fase_procedimiento: FaseProcedimiento = Field(
         ..., 
-        description="Fase exacta del flujo operativo de exportación donde se ubica el tema consultado."
+        description="Fase exacta del flujo operativo donde se ubica el tema."
     )
     sustento_legal_o_normativo: List[str] = Field(
-        ..., 
-        description="Leyes, providencias o secciones internas del manual mencionadas explícitamente en los textos recuperados."
+        default_factory=list, 
+        description="Leyes, providencias o secciones internas mencionadas en el contexto."
     )
     protocolo_emergencia: ProtocoloEmergencia = Field(
         ..., 
-        description="Sub-objeto que detalla el protocolo a seguir en caso de incidentes."
+        description="Sub-objeto que detalla si la consulta es una contingencia/falla operativa física."
     )
     citas_evidencia: List[CitaBaseConocimiento] = Field(
-        ...,
-        description="Lista de fragmentos textuales del contexto RAG que demuestran la veracidad de los datos entregados."
+        default_factory=list,
+        description="Lista de fragmentos textuales del contexto RAG."
     )
 
 # =====================================================================

@@ -95,7 +95,7 @@ def main():
     # -----------------------------------------------------------------
     print("\n" + "="*60 + "\n   PROCESANDO FLUJO DE TRABAJO REAL\n" + "="*60)
     
-    pregunta = " ¿Cuánto me sale el flete para mañana? Y otra cosa, ¿cómo hago con la inspección del precinto?"
+    pregunta = "Hola, necesito hacer un embarque de 3 contenedores en el mismo booking. ¿Cuánto me costaría el agenciamiento aduanal?"
 
     # 1. El orquestador atiende al usuario
     # res_orquestador: OrquestadorAgentResponse = orquestador.consultar(pregunta)
