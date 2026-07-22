@@ -10,7 +10,7 @@ El enfoque radica en el desarrollo de un sistema de **multi-agentes**, ya que pe
 
 - [Manual de Normas y Procedimientos de Exportación](../assets/manual_normas_procedimientos_exportacion.pdf)
 - [Tarifario de Exportación](../assets/tarifario_exportacion.pdf)
-- [Sección Base de Preguntas y Respuestas](../assets/seccion_base_preguntas_respuestas.pdf)
+- [Sección Base de Preguntas y Respuestas](../docs/seccion_base_preguntas_respuestas.pdf)
 
 ---
 
