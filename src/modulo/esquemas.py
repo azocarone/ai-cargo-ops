@@ -134,3 +134,34 @@ class FinancieroAgentResponse(BaseModel):
     desglose_costos: List[ConceptoDetalle] = Field(default=[], description="Lista de los conceptos y tarifas asociados a la consulta.")
     politica_aplicable: Optional[str] = Field(None, description="Especificación de políticas de facturación (Anticipos, Demurrage, Pago en Bs/BCV, Almacenaje) si aplica.")
     monto_total_estimado_usd: float = Field(description="Suma total de los cargos identificados en USD. 0.0 si es informativo.")
+
+# =====================================================================
+# ESQUEMAS DEL AGENTE BOT
+# =====================================================================
+
+class CategoriaIntencion(str, Enum):
+    SALUDO = "saludo"
+    DESPEDIDA = "despedida"
+    INFORMACION_INSTITUCIONAL = "informacion_institucional"
+    RESUMEN_SERVICIOS = "resumen_servicios"
+    INFORMACION_CONTACTO = "informacion_contacto"
+    FUERA_DE_AMBITO = "fuera_de_ambito"
+
+class BotAgentResponse(BaseModel):
+    esta_dentro_del_ambito: bool = Field(
+        description="Indica si la consulta del usuario está dentro del ámbito permitido de DEPORCA."
+    )
+    categoria: CategoriaIntencion = Field(
+        description="Categoría principal identificada en la interacción."
+    )
+    mensaje: str = Field(
+        description="Respuesta textual amigable, profesional y estrictamente en español dirigida al usuario final."
+    )
+    redirigir_a_humano: bool = Field(
+        default=False,
+        description="Se activa en True si la consulta requiere atención comercial/operativa especializada fuera del bot.",
+    )
+    seguimiento_sugerido: Optional[str] = Field(
+        default=None,
+        description="Sugerencia breve opcional en español para guiar al usuario a otra consulta válida.",
+    )

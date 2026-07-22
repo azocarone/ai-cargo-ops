@@ -42,3 +42,21 @@ Agente diseñado mediante el procesamiento del lenguaje natural para optimizar y
 
 ---
 
+## 🗺 Roadmap
+
+- [x]
+- [ ]
+
+---
+
+## ⚖️ Licencia
+
+Este proyecto se distribuye bajo la **Licencia MIT**. El contenido personal y la trayectoria profesional son propiedad intelectual de **José Azócar**.
+
+---
+
+<div align="right">
+    <strong>José Antonio Azócar Marcano</strong><br>
+    Ing. Informático | Consultor I&O: Infraestructura y Ops.<br>
+    <a href="https://github.com/azocarone">@azocarone</a>
+</div>

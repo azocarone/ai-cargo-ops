@@ -63,7 +63,7 @@ class GestorRAG:
         # Guardamos el buscador configurado con sus filtros
         self.retriever = vectorstore.as_retriever(
             search_type="similarity_score_threshold",
-            search_kwargs={"score_threshold": 0.3, "k": 3}
+            search_kwargs={"score_threshold": 0.15, "k": 3}
         )
         logger.info("✅ Base de datos vectorial FAISS lista y operativa.")
         return self.retriever

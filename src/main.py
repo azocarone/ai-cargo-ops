@@ -5,8 +5,8 @@ from dotenv import load_dotenv
 
 # Importaciones de soporte e infraestructura
 from modulo.gestor_rag import GestorRAG
-from modulo.esquemas import OrquestadorAgentResponse, AuditorAgentResponse, FinancieroAgentResponse
-from modulo.prompts import PROMPT_ORQUESTADOR, PROMPT_AUDITOR, PROMPT_FINANCIERO 
+from modulo.esquemas import OrquestadorAgentResponse, AuditorAgentResponse, FinancieroAgentResponse, BotAgentResponse
+from modulo.prompts import PROMPT_ORQUESTADOR, PROMPT_AUDITOR, PROMPT_FINANCIERO, PROMPT_BOT
 
 # Importaciones de agentes polimórficos
 from modulo.agente_rag import AgenteRAG
@@ -90,6 +90,14 @@ def main():
         modo_desarrollo=modo_dev
     )
 
+    # Capa Operativa: Bot
+    agente_bot = AgenteDirecto(
+        prompt_sistema=PROMPT_BOT,
+        esquema_respuesta=BotAgentResponse,
+        nombre_agente="Bot",
+        modo_desarrollo=modo_dev
+    )
+
     # -----------------------------------------------------------------
     # PASO 3: Ejecución de Ejemplos
     # -----------------------------------------------------------------
@@ -120,6 +128,14 @@ def main():
     # Visualización de los resultados de manera limpia como JSON
     print("\n[Output Final del Financiero]:")
     print(res_financiero.model_dump_json(indent=4))
+
+    # 4. El Bot ejecuta su flujo con la base FAISS
+    res_bot: BotAgentResponse = agente_bot.consultar(pregunta)
+    logger.info("Bot analizó con éxito la intención.")
+    
+    # Visualización de los resultados de manera limpia como JSON
+    print("\n[Output Final del Bot]:")
+    print(res_bot.model_dump_json(indent=4))
 
 if __name__ == "__main__":
     main()
