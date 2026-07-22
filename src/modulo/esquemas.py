@@ -136,7 +136,7 @@ class FinancieroAgentResponse(BaseModel):
     monto_total_estimado_usd: float = Field(description="Suma total de los cargos identificados en USD. 0.0 si es informativo.")
 
 # =====================================================================
-# ESQUEMAS DEL AGENTE BOT
+# ESQUEMAS DEL AGENTE BOT (Asistente Virtual)
 # =====================================================================
 
 class CategoriaIntencion(str, Enum):

@@ -1,11 +1,5 @@
 # Planteamiento del Sistema
 
-<div align="center">
-  <img src="../assets/img/sistema_multi_agente_exportacion_especializada.png" alt="Sistena Multi-Agente DEPORCA: Inteligencia Especializada en Exportación" width="80%" height="80%" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-</div>
-
----
-
 El enfoque radica en el desarrollo de un sistema de **multi-agentes**, ya que permitirá una especialización profunda basada en la documentación de **DEPORCA**:
 
 - [Manual de Normas y Procedimientos de Exportación](../assets/manual_normas_procedimientos_exportacion.pdf)
@@ -272,6 +266,59 @@ A continuación, se presenta la representación JSON resultante de la validació
 }
 ```
 
+---
+
+### 2.3. Agente Bot (Asistente Virtual)
+
+#### Contexto
+
+El **Asistente Virtual de Almacenes y Depósitos Integrales Portuarios, C.A. (DEPORCA)** está concebido como un agente de IA conversacional de primer nivel (Nivel 1 de atención), orientado al ámbito **institucional e informativo**.
+
+Su propósito fundamental es actuar como un filtro de interacción eficiente: resuelve dudas fácticas de cara al cliente (historia, misión, servicios generales, ubicación y contacto) y aplica **reglas estrictas de contención y enrutamiento** cuando la solicitud escala a temas operativos, comerciales (cotizaciones, rastreo) o ajenos a la organización.
+
+<div align="center">
+  <img src="../assets/img/agente_bot.png" alt="Agente Bot (Asistente Virtual)" width="45%" height="45%" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+</div>
+
+---
+
+#### Mecanismos de Operación
+
+El agente opera mediante un flujo de procesamiento estructurado (*Structured Outputs*) respaldado por validación de esquemas en Python (*Pydantic*):
+
+<div align="center">
+  <img src="../assets/img/agente_bot_operacion.png" alt="Agente Bot Mecanismo de Operación" width="45%" height="45%" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+</div>
+
+- **Evaluación de Ámbito e Intención:** Clasifica la entrada del usuario en una categoría delimitada mediante la enumeración `CategoriaIntencion` (`saludo`, `despedida`, `informacion_institucional`, `resumen_servicios`, `informacion_contacto` o `fuera_de_ambito`).
+
+- **Regla Estricta de Idioma:** Analiza el texto de entrada y fuerza la generación de la respuesta (`mensaje`) **únicamente en idioma español**, sin importar el idioma de origen del usuario.
+
+- **Mecanismo de Desviación y Escalado (Handoff):** Si se detecta un tema fuera de alcance (p. ej., cotizaciones o estatus de contenedores), se asigna el atributo `esta_dentro_del_ambito = False` y se activa la bandera booleana `redirigir_a_humano = True` para delegar el caso a un asesor comercial.
+
+- **Guiado Conversacional (Proactividad):** Puede incorporar de forma opcional una pregunta o sugerencia contextual mediante `seguimiento_sugerido` para orientar al usuario dentro del flujo permitido.
+
+---
+
+#### Ejemplo de Estructura de Datos JSON
+
+A continuación se muestra la salida esperada del modelo tras procesar la consulta de un cliente extranjero que solicita cotizaciones:
+
+**Entrada del usuario:**
+
+> *"Hi, I need a quote for shipping a 40ft container to Puerto Cabello."*
+
+**Salida estructurada JSON (Validada por `BotAgentResponse`):**
+
+```json
+{
+  "esta_dentro_del_ambito": false,
+  "categoria": "fuera_de_ambito",
+  "mensaje": "Hola. Atendemos únicamente en idioma español. Lamentablemente no realizamos cotizaciones directamente por este medio. Para consultar tarifas y detalles operativos, te transferiremos con un asesor comercial.",
+  "redirigir_a_humano": true,
+  "seguimiento_sugerido": null
+}
+```
 ---
 
 ## Ventajas del Enfoque Multi-Agente para DEPORCA

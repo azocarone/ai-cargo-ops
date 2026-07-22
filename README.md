@@ -24,7 +24,16 @@ Agente diseñado mediante el procesamiento del lenguaje natural para optimizar y
 
 ## 📖 Tabla de Contenidos
 
+- ⚑ [Planteamiento del Sistema](./docs/planteamiento_del_sistema.md)
 - ⚑ [Actividades del Desarrollo](#-actividades-del-desarrollo)
+
+---
+
+## Planteamiento del Sistema (Resumen)
+
+<div align="right">
+  <p><br>🔗 <a href="./docs/planteamiento_del_sistema.md">Para ver más ...</a></p>
+</div>
 
 ---
 

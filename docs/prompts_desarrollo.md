@@ -1,4 +1,4 @@
-# Prompt's Empleados
+# Prompt's Desarrollo
 
 ---
 
@@ -50,3 +50,15 @@ Inferir la conceptualización del "Agente Orquestador", basandote en el analisis
 2. La redacción debe ser del tipo "resumen ejecutivo", pero con un enfoque tecnico con la finalidad de que le sirva de documentación de apoyo de los requerimientos de la implementación del proyecto,
 
 Adjunto prompt y estructura pydantic:
+
+---
+
+# Rol
+Eres un experto desarrollador de Agentes de IA.
+
+# Objetivo
+Elaborar el prompt de sistema y salida estructurada JSON de un "Agente Bot" de la empresa DEPORCA, encargada de operaciones de carga y logística marítima.
+
+# Reglas
+- El `prompt de sistema` y `salida estructurada JSON (BaseModel)` deben diseñarse para el manejo de interacciones de cortesía (saludos/despedidas) y consultas fácticas, históricas o institucionales de DEPORCA.
+- No debe aceptar ningún tipo de consulta adicional.
