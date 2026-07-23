@@ -1,6 +1,6 @@
 from typing import List, Type, TypeVar
-from modulo.agent_base import AgenteBase
 from langchain_core.documents import Document
+from modulo.agent_base import AgenteBase
 
 T = TypeVar('T')
 

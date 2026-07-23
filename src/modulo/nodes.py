@@ -1,21 +1,22 @@
 """
 nodes.py - Etapa 2: Definición de los Nodos del Grafo (Nodes)
 """
-from state import EstadoMultiAgente
+from modulo.state import EstadoMultiAgente
 from modulo.schemes import (
     OrquestadorAgentResponse,
     AuditorAgentResponse,
     FinancieroAgentResponse,
     BotAgentResponse
 )
-# Se asume que las instanciaciones de los agentes provienen de un módulo de configuración o inicialización
-from agentes_config import agent_orquestador, agent_auditor, agent_financiero, agent_bot
+
+# Importamos directamente el diccionario de agentes
+from modulo.agents_factory import AGENTS
 
 
 def nodo_orquestador(state: EstadoMultiAgente) -> dict:
     """Procesa la entrada del usuario y extrae metadatos/enrutamiento."""
     pregunta = state["pregunta_usuario"]
-    res_orquestador: OrquestadorAgentResponse = agent_orquestador.consultar(pregunta)
+    res_orquestador: OrquestadorAgentResponse = AGENTS["orquestador"].consultar(pregunta)
     return {"payload_orquestador": res_orquestador}
 
 
@@ -26,7 +27,7 @@ def nodo_auditor(state: EstadoMultiAgente) -> dict:
         (item.contexto_agente for item in payload.agentes_activados if item.agente == "auditor"),
         state["pregunta_usuario"]
     )
-    res_auditor: AuditorAgentResponse = agent_auditor.consultar(contexto_especifico)
+    res_auditor: AuditorAgentResponse = AGENTS["auditor"].consultar(contexto_especifico)
     return {"respuesta_auditor": res_auditor}
 
 
@@ -37,7 +38,7 @@ def nodo_financiero(state: EstadoMultiAgente) -> dict:
         (item.contexto_agente for item in payload.agentes_activados if item.agente == "financiero"),
         state["pregunta_usuario"]
     )
-    res_financiero: FinancieroAgentResponse = agent_financiero.consultar(contexto_especifico)
+    res_financiero: FinancieroAgentResponse = AGENTS["financiero"].consultar(contexto_especifico)
     return {"respuesta_financiero": res_financiero}
 
 
@@ -48,7 +49,7 @@ def nodo_bot(state: EstadoMultiAgente) -> dict:
         (item.contexto_agente for item in payload.agentes_activados if item.agente == "bot"),
         state["pregunta_usuario"]
     )
-    res_bot: BotAgentResponse = agent_bot.consultar(contexto_especifico)
+    res_bot: BotAgentResponse = AGENTS["bot"].consultar(contexto_especifico)
     return {"respuesta_bot": res_bot}
 
 

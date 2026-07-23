@@ -2,15 +2,15 @@
 builder.py - Etapa 4: Ensamblado e Construcción del Grafo (StateGraph)
 """
 from langgraph.graph import StateGraph, START, END
-from state import EstadoMultiAgente
-from nodes import (
+from modulo.state import EstadoMultiAgente
+from modulo.nodes import (
     nodo_orquestador,
     nodo_auditor,
     nodo_financiero,
     nodo_bot,
     nodo_sintetizador
 )
-from router import ruteador_orquestador
+from modulo.router import ruteador_orquestador
 
 def crear_grafo_deporca():
     """Construye y compila el flujo de LangGraph para DEPORCA."""

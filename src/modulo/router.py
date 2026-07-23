@@ -2,7 +2,7 @@
 router.py - Etapa 3: Lógica de Enrutamiento Dinámico (Conditional Edges
 """
 from typing import List
-from state import EstadoMultiAgente
+from modulo.state import EstadoMultiAgente
 
 MAPA_NODOS = {
     "auditor": "nodo_auditor",

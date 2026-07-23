@@ -3,14 +3,10 @@ import logging
 import sys
 from dotenv import load_dotenv
 
-# Importaciones de soporte e infraestructura
+# Importaciones de infraestructura y soporte
 from modulo.manager_rag import GestorRAG
-from modulo.prompts import PROMPT_ORQUESTADOR, PROMPT_AUDITOR, PROMPT_FINANCIERO, PROMPT_BOT
-from modulo.schemes import OrquestadorAgentResponse, AuditorAgentResponse, FinancieroAgentResponse, BotAgentResponse
-
-# Importaciones de agentes polimórficos
-from modulo.agent_direct import AgenteDirecto
-from modulo.agent_rag import AgenteRAG
+from modulo.agents_factory import inicializar_agentes
+from modulo.builder import crear_grafo_deporca
 
 
 # =====================================================================
@@ -47,7 +43,7 @@ def main():
     logger = inicializar_entorno()
     logger.info("Iniciando entorno multi-agente de producción...")
 
-    # Evaluación de forma segura la bandera de desarrollo
+    # Evaluación de forma segura, bandera de desarrollo
     modo_dev = os.environ.get("MODO_DESARROLLO", "False").lower() in ("true", "1", "t")
 
     # -----------------------------------------------------------------
@@ -64,44 +60,12 @@ def main():
     # -----------------------------------------------------------------
     logger.info("Instanciando la jerarquía de agentes...")
 
-    # Capa Superior: Orquestador (No requiere retriever ya que hereda de AgenteDirecto)
-    agent_orquestador = AgenteDirecto(
-        prompt_sistema=PROMPT_ORQUESTADOR,
-        esquema_respuesta=OrquestadorAgentResponse,
-        nombre_agente="Orquestador",
-        modo_desarrollo=modo_dev
-    )
-
-    # Capa Operativa: Auditor (Requiere retriever e inyecta la lógica RAG)
-    agent_auditor = AgenteRAG(
-        retriever=retriever_compartido,
-        prompt_sistema=PROMPT_AUDITOR,
-        esquema_respuesta=AuditorAgentResponse,
-        nombre_agente="Auditor",
-        modo_desarrollo=modo_dev
-    )
-
-    # Capa Operativa: Financiero (Reutiliza el mismo retriever compartido)
-    agent_financiero = AgenteRAG(
-        retriever=retriever_compartido,
-        prompt_sistema=PROMPT_FINANCIERO,
-        esquema_respuesta=FinancieroAgentResponse,
-        nombre_agente="Financiero",
-        modo_desarrollo=modo_dev
-    )
-
-    # Capa Operativa: Bot (No requiere retriever ya que hereda de AgenteDirecto)
-    agent_bot = AgenteDirecto(
-        prompt_sistema=PROMPT_BOT,
-        esquema_respuesta=BotAgentResponse,
-        nombre_agente="Bot",
-        modo_desarrollo=modo_dev
-    )
+    # Puebla el diccionario AGENTES
+    inicializar_agentes(modo_dev, retriever_compartido)
 
     # -----------------------------------------------------------------
     # PASO 3: Implementación del Sistema Multi-Agente con LangGraph
     # -----------------------------------------------------------------
-    from modulo.builder import crear_grafo_deporca
 
     # Compilar el grafo modularizado
     app = crear_grafo_deporca()
