@@ -1,7 +1,7 @@
 import logging
 from typing import Type, TypeVar, Generic, Dict, Any
 from langchain_core.prompts import ChatPromptTemplate
-from modulo.gestor_llm import GestorLLM
+from modulo.manager_llm import GestorLLM
 
 T = TypeVar('T')
 

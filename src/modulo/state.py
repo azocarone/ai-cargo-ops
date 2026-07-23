@@ -2,8 +2,7 @@
 state.py - Etapa 1: Mapeo del Estado Global del Grafo (State)
 """
 from typing import TypedDict, Optional
-from typing import TypedDict, Optional
-from esquemas import (
+from modulo.schemes import (
     OrquestadorAgentResponse,
     AuditorAgentResponse,
     FinancieroAgentResponse,

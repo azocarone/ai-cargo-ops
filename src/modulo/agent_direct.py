@@ -1,5 +1,5 @@
 from typing import TypeVar, Dict, Any
-from modulo.agente_base import AgenteBase
+from modulo.agent_base import AgenteBase
 from langchain_core.prompts import ChatPromptTemplate
 
 T = TypeVar('T')
