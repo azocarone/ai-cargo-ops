@@ -82,5 +82,5 @@ def inicializar_agentes(modo_dev: bool, retriever_compartido):
                 )
             kwargs["retriever"] = retriever_compartido
 
-        # Se guardan en el diccionario global 'AGENTES'
+        # Se guardan en el diccionario global 'AGENTS'
         AGENTS[cfg["clave"]] = cfg["clase"](**kwargs)
