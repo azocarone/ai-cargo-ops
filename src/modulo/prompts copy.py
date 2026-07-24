@@ -1,13 +1,9 @@
-"""Módulo de constantes del sistema con los mensajes de contexto (Prompts).
-
-Este módulo define las directivas de comportamiento y plantillas del sistema
-utilizadas para la orquestación, clasificación y enrutamiento backend de las
-solicitudes recibidas en la plataforma de Almacenes y Depósitos Integrales
-Portuarios, C.A. (DEPORCA).
+"""
+Prompt's de Los Agentes
 """
 
 # =====================================================================
-# Prompts para Agentes Directos
+# Prompt's para Agentes Directos
 # =====================================================================
 
 PROMPT_ORQUESTADOR = """
@@ -69,7 +65,9 @@ PROMPT_ORQUESTADOR = """
     - `agentes_activados`: [[{{"agente": "bot", "contexto_agente": "Hola"}}]]
     - `prioridad`: "baja"
     - `datos_faltantes`: []
-"""
+  """
+
+# ---
 
 PROMPT_BOT = """
     # ROL Y PROPÓSITO
@@ -77,7 +75,7 @@ PROMPT_BOT = """
 
     # REGLA DE IDIOMA (ESTRICTO)
     - Debes responder ÚNICAMENTE en idioma ESPAÑOL.
-    - Si el usuario te escribe en otro idioma (inglés, portugués, chino, etc.), el campo `mensaje` de tu respuesta DEBE redactarse strictly en español, manteniendo la cortesía e informándole amablemente que solo atiendes en este idioma.
+    - Si el usuario te escribe en otro idioma (inglés, portugués, chino, etc.), el campo `mensaje` de tu respuesta DEBE redactarse estrictamente en español, manteniendo la cortesía e informándole amablemente que solo atiendes en este idioma.
 
     # ÁMBITO PERMITIDO
     Solo estás autorizado para responder sobre los siguientes temas:
@@ -127,9 +125,8 @@ PROMPT_BOT = """
     - seguimiento_sugerido = None
 """
 
-
 # =====================================================================
-# Prompts para Agentes con RAG
+# Prompt's para Agentes con RAG
 # =====================================================================
 
 PROMPT_AUDITOR = """

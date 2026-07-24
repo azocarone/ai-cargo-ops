@@ -1,12 +1,13 @@
-import os
 import logging
+import os
 import sys
+
 from dotenv import load_dotenv
 
 # Importaciones de infraestructura y soporte
-from modulo.manager_rag import GestorRAG
 from modulo.agents_factory import inicializar_agentes
 from modulo.builder import crear_grafo_deporca
+from modulo.manager_rag import GestorRAG
 
 
 # =====================================================================
@@ -60,8 +61,7 @@ def main():
     # -----------------------------------------------------------------
     logger.info("Instanciando la jerarquía de agentes...")
 
-    # Puebla el diccionario AGENTES
-    inicializar_agentes(modo_dev, retriever_compartido)
+    agentes_instanciados = inicializar_agentes(modo_dev, retriever_compartido)
 
     # -----------------------------------------------------------------
     # PASO 3: Implementación del Sistema Multi-Agente con LangGraph
@@ -70,26 +70,39 @@ def main():
     # Compilar el grafo modularizado
     app = crear_grafo_deporca()
 
-    pregunta = (
-        "Hola, requiero exportar 3 contenedores en un mismo booking desde Valencia hacia el puerto. "
-        "Además, uno de ellos tiene una factura con 5 ítems de clasificación arancelaria compleja. "
-        "¿Cuánto me costaría el agenciamiento, la DUA y el transporte? ¿Puedo pagar en bolívares?"
-    )
+    print("=== Sistema Multi-Agente DEPORCA Activo ===")
+    print("Escribe 'salir' para terminar la conversación.\n")
 
-    estado_inicial = {
-        "pregunta_usuario": pregunta,
-        "payload_orquestador": None,
-        "respuesta_auditor": None,
-        "respuesta_financiero": None,
-        "respuesta_bot": None,
-        "respuesta_final": ""
-    }
+    while True:
+        pregunta = input("Ingresa tu consulta: ").strip()
 
-    # Invocación del sistema multi-agente
-    resultado = app.invoke(estado_inicial)
+        # Condición para salir del bucle
+        if pregunta.lower() in ["salir", "exit", "quit"]:
+            print("\n¡Hasta luego!")
+            break
 
-    print("\n--- RESUMEN FINAL ---")
-    print(resultado["respuesta_final"])
+        # Validar que no haya ingresado un texto vacío
+        if not pregunta:
+            print("Por favor, ingresa una pregunta válida.\n")
+            continue
+
+        estado_inicial = {
+            "pregunta_usuario": pregunta,
+            "agentes": agentes_instanciados,
+            "payload_orquestador": None,
+            "respuesta_auditor": None,
+            "respuesta_financiero": None,
+            "respuesta_bot": None,
+            "respuesta_final": ""
+        }
+
+        # Invocación del sistema multi-agente
+        resultado = app.invoke(estado_inicial)
+
+        print("\n--- RESUMEN FINAL ---")
+        print(resultado["respuesta_final"])
+        print("\n" + "="*40 + "\n")
+
 
 if __name__ == "__main__":
     main()
