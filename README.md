@@ -55,7 +55,7 @@ El desarrollo de un **sistema multi-agente** plantea la optimización de las con
 
 ## 🗺 Roadmap
 
-- [x]
+- [ ] API REST (FastAPI)
 - [ ]
 
 ---
