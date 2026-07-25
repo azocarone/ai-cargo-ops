@@ -1,4 +1,4 @@
-# Planteamiento del Sistema
+# 📐 Planteamiento del Sistema
 
 <div align="center">
   <img src="../assets/img/sistema_multi_agente_exportacion_especializada.png" alt="Sistena Multi-Agente DEPORCA: Inteligencia Especializada en Exportación" width="80%" height="80%" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">

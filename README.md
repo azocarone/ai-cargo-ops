@@ -24,12 +24,12 @@ Agente diseñado mediante el procesamiento del lenguaje natural para optimizar y
 
 ## 📖 Tabla de Contenidos
 
-- ⚑ [Planteamiento del Sistema](./docs/planteamiento_del_sistema.md)
-- ⚑ [Actividades del Desarrollo](#-actividades-del-desarrollo)
+- 📐 [Planteamiento del Sistema](./docs/planteamiento_del_sistema.md)
+- 🛠️ [Desarrollo](#-desarrollo)
 
 ---
 
-## Planteamiento del Sistema (Resumen)
+## 📐 Planteamiento del Sistema (Resumen)
 
 El desarrollo de un **sistema multi-agente** plantea la optimización de las consultas operativas y logísticas de la empresa portuaria **DEPORCA**. La arquitectura se basa en un **Agente Orquestador** que clasifica y redirige las solicitudes hacia tres especialistas: el **Agente Auditor**, el **Agente Financiero** y el **Agente Bot**. Cada uno opera bajo un esquema de **"fuente de verdad"**, utilizando manuales de normas y tarifarios oficiales para garantizar respuestas precisas y sin errores. Este enfoque permite segmentar tareas complejas, como la gestión de **incidentes de seguridad** o el cálculo de **costos de exportación**, asegurando la trazabilidad legal en cada interacción. Al separar las responsabilidades, el sistema mejora la **eficiencia operativa** y reduce significativamente el riesgo de proporcionar información incorrecta al usuario.
 
@@ -39,7 +39,7 @@ El desarrollo de un **sistema multi-agente** plantea la optimización de las con
 
 ---
 
-## ⚑ Actividades del Desarrollo
+## 🛠️ Desarrollo
 
 1. **Inicialización**: La fase inicial comprende la creación del repositorio en **GitHub**, la asignación de la licencia (**MIT**) para la gestión de los términos de uso del código y la configuración del entorno virtual de **Python**.
 
@@ -53,14 +53,14 @@ El desarrollo de un **sistema multi-agente** plantea la optimización de las con
 
 ---
 
-## 🗺 Roadmap
+## 🗺️ Roadmap
 
 - [ ] API REST (FastAPI)
 - [ ]
 
 ---
 
-## ⚖️ Licencia
+## 📜 Licencia
 
 Este proyecto se distribuye bajo la **Licencia MIT**. El contenido personal y la trayectoria profesional son propiedad intelectual de **José Azócar**.
 
