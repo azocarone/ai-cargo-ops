@@ -13,11 +13,11 @@
 Agente diseñado mediante el procesamiento del lenguaje natural para optimizar y resolver consultas sobre las operaciones de carga y logística marítima de la empresa, "_Almacenes y Depósitos Integrales Portuarios, C.A._" (**_DEPORCA_**):
 
 <div align="center">
-  <img src="./assets/img/guia_exportacion_puerto.png" alt="Guía de exportación en puerto" width="95%" height="95%" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+    <img src="./assets/img/guia_exportacion_puerto.png" alt="Guía de exportación en puerto" width="95%" height="95%" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
 </div>
 
 <div align="right">
-  <p><br>🔗 <a href="https://azocarone-ai-cargo-ops.streamlit.app/">Ver la app en funcionamiento.</a></p>
+    <p><br>🔗 <a href="https://azocarone-ai-cargo-ops.streamlit.app/">Ver la app en funcionamiento.</a></p>
 </div>
 
 ---
@@ -26,6 +26,11 @@ Agente diseñado mediante el procesamiento del lenguaje natural para optimizar y
 
 - 📐 [Planteamiento del Sistema](./docs/planteamiento_del_sistema.md)
 - 🛠️ [Desarrollo](#-desarrollo)
+- 💻 [Instalación y Configuración](#-instalación-y-configuración)
+- ⚙️ [Variables de Entorno](#️-variables-de-entorno)
+- 🚀 [Ejecución](#-ejecución)
+- 🗺️ [Roadmap](#️-roadmap)
+- 📜 [Licencia](#-licencia)
 
 ---
 
@@ -34,7 +39,7 @@ Agente diseñado mediante el procesamiento del lenguaje natural para optimizar y
 El desarrollo de un **sistema multi-agente** plantea la optimización de las consultas operativas y logísticas de la empresa portuaria **DEPORCA**. La arquitectura se basa en un **Agente Orquestador** que clasifica y redirige las solicitudes hacia tres especialistas: el **Agente Auditor**, el **Agente Financiero** y el **Agente Bot**. Cada uno opera bajo un esquema de **"fuente de verdad"**, utilizando manuales de normas y tarifarios oficiales para garantizar respuestas precisas y sin errores. Este enfoque permite segmentar tareas complejas, como la gestión de **incidentes de seguridad** o el cálculo de **costos de exportación**, asegurando la trazabilidad legal en cada interacción. Al separar las responsabilidades, el sistema mejora la **eficiencia operativa** y reduce significativamente el riesgo de proporcionar información incorrecta al usuario.
 
 <div align="right">
-  <p>🔗 <a href="./docs/planteamiento_del_sistema.md">Conoce la arquitectura completa del sistema.</a></p>
+    <p>🔗 <a href="./docs/planteamiento_del_sistema.md">Conoce la conceptualización completa del sistema.</a></p>
 </div>
 
 ---
@@ -53,8 +58,86 @@ El desarrollo de un **sistema multi-agente** plantea la optimización de las con
 
 ---
 
+## 💻 Instalación y Configuración
+
+Siga estos pasos para configurar el entorno de desarrollo localmente:
+
+1. **Clonar el repositorio:**
+
+    ```bash
+    git clone https://github.com/azocarone/ai-cargo-ops
+    cd ai-cargo-ops
+    ```
+
+2. **Preparar el entorno de desarrollo:**
+
+    - **venv en Linux/Mac:**
+
+        ```bash
+        python3.13 -m venv .venv
+        source .venv/bin/activate.fish # Shell Fish
+        source .venv/bin/activate # Shell Bash
+        ```
+
+    - **venv en Windows:**
+
+        ```bash
+        python3.13 -m venv .venv
+        .\.venv\Scripts\activate
+        ````
+
+3. **Instalar dependencias:**
+    
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4. **Crear archivo de variables de entorno:** 
+
+    Cree un archivo `.env` en la raíz del proyecto (ver sección de [Variables de Entorno](#️-variables-de-entorno)).
+
+---
+
+## ⚙️ Variables de Entorno
+
+Para el funcionamiento del sistema, es necesario configurar las siguientes variables en el archivo `.env`:
+
+| Variable          | Descripción                                                             | Requerido | Ejemplo   |
+| :-----------------| :---------------------------------------------------------------------- | :-------- | :---------|
+| `LOG_LEVEL`       | Nivel de verbosidad del log (DEBUG, INFO, WARNING, ERROR, CRITICAL)     | Sí        | WARNING   |
+| `ASSETS_PATH`     | Directorio de alojamiento de los documentos PDF para el RAG             | Sí        | ./assets  |
+| `MODO_DESARROLLO` | Define perfil de operación del LLM (Desarrollo=True y Producción=False) | Sí        | True      |
+| `NVIDIA_API_KEY`  | NVIDIA Build API KEY                                                    | Sí        | "API KEY" |
+
+---
+
+## 🚀 Ejecución
+
+Estando en el directorio raíz del proyecto, acceder al sub-directorio `src`:
+
+```bàsh
+cd src
+```
+
+Luego podrá ejecutar las respectivas interfaces del sistemas:
+
+- **Interfaz CLI:**
+
+    ```bàsh
+    python app.py
+    ```
+
+- **Interfaz Web:**
+
+    ```bàsh
+    streamlit run app_web.py  
+    ```
+
+---
+
 ## 🗺️ Roadmap
 
+- [ ] Mejora de las interfaces de usuario (UI).
 - [ ] Gestión de colas de usuarios.
 - [ ] API REST (FastAPI).
 
