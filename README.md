@@ -55,8 +55,8 @@ El desarrollo de un **sistema multi-agente** plantea la optimización de las con
 
 ## 🗺️ Roadmap
 
-- [ ] API REST (FastAPI)
-- [ ]
+- [ ] Gestión de colas de usuarios.
+- [ ] API REST (FastAPI).
 
 ---
 
