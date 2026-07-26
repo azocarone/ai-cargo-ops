@@ -1,7 +1,7 @@
 # 🤖 Agente de IA para Consultas de Operaciones y Logística Marítima
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub: Profile](https://img.shields.io/badge/GitHub-Profile-181717?logo=github)](https://github.com/azocarone)
+<br>
+
 [![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)](https://www.python.org/)
 [![NVIDIA Build](https://img.shields.io/badge/NVIDIA%20Build-76B900?style=flat&logo=nvidia&logoColor=white)](https://build.nvidia.com/)
 [![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=flat&logo=langchain&logoColor=white)](https://www.langchain.com/)
@@ -10,7 +10,11 @@
 [![FAISS CPU](https://img.shields.io/badge/FAISS%20CPU-005A9C?style=flat&logo=meta&logoColor=white)](https://github.com/facebookresearch/faiss)
 [![LangGraph](https://img.shields.io/badge/LangGraph-1C3C3C?style=flat&logo=langchain&logoColor=white)](https://langchain-ai.github.io/langgraph/)
 
+<br>
+
 Agente diseñado mediante el procesamiento del lenguaje natural para optimizar y resolver consultas sobre las operaciones de carga y logística marítima de la empresa, "_Almacenes y Depósitos Integrales Portuarios, C.A._" (**_DEPORCA_**):
+
+<br>
 
 <div align="center">
     <img src="./assets/img/guia_exportacion_puerto.png" alt="Guía de exportación en puerto" width="95%" height="95%" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
@@ -20,7 +24,7 @@ Agente diseñado mediante el procesamiento del lenguaje natural para optimizar y
     <p><br>🔗 <a href="https://azocarone-ai-cargo-ops.streamlit.app/">Ver la app en funcionamiento.</a></p>
 </div>
 
----
+<br>
 
 ## 📖 Tabla de Contenidos
 
@@ -32,7 +36,7 @@ Agente diseñado mediante el procesamiento del lenguaje natural para optimizar y
 - 🗺️ [Roadmap](#️-roadmap)
 - 📜 [Licencia](#-licencia)
 
----
+<br>
 
 ## 📐 Planteamiento del Sistema (Resumen)
 
@@ -42,7 +46,7 @@ El desarrollo de un **sistema multi-agente** plantea la optimización de las con
     <p>🔗 <a href="./docs/planteamiento_del_sistema.md">Conoce la conceptualización completa del sistema.</a></p>
 </div>
 
----
+<br>
 
 ## 🛠️ Desarrollo
 
@@ -56,7 +60,7 @@ El desarrollo de un **sistema multi-agente** plantea la optimización de las con
 
 5. **Implementación del Agente (Flujos con Estado)**: La etapa final integra el sistema RAG construido en el paso anterior con **LangGraph** para establecer un sistema autónomo. Se diseña un flujo de trabajo cíclico que permite al agente evaluar la precisión de las respuestas obtenidas, determinar la necesidad de utilizar herramientas adicionales o ejecutar nuevas iteraciones de búsqueda en la base documental.
 
----
+<br>
 
 ## 💻 Instalación y Configuración
 
@@ -94,9 +98,9 @@ Siga estos pasos para configurar el entorno de desarrollo localmente:
 
 4. **Crear archivo de variables de entorno:** 
 
-    Cree un archivo `.env` en la raíz del proyecto (ver sección de [Variables de Entorno](#️-variables-de-entorno)).
+    Cree un archivo `.env` en la raíz del proyecto (ver sección de 🔗[Variables de Entorno](#️-variables-de-entorno)).
 
----
+<br>
 
 ## ⚙️ Variables de Entorno
 
@@ -109,7 +113,7 @@ Para el funcionamiento del sistema, es necesario configurar las siguientes varia
 | `MODO_DESARROLLO` | Define perfil de operación del LLM (Desarrollo=True y Producción=False) | Sí        | True      |
 | `NVIDIA_API_KEY`  | NVIDIA Build API KEY                                                    | Sí        | "API KEY" |
 
----
+<br>
 
 ## 🚀 Ejecución
 
@@ -133,7 +137,25 @@ Luego podrá ejecutar las respectivas interfaces del sistemas:
     streamlit run app_web.py  
     ```
 
----
+<br>
+
+## Sección Base de Test al Sistema
+
+| Preguntas | Agentes |
+|:---------|:-------|
+| ¿Qué pasa si un contenedor esta dañado? | **Auditor** | 
+| ¿Qué debe hacer el Agente de Aduanas si el funcionario del SENIAT tiene un criterio técnico con el que la empresa no está de acuerdo? | **Auditor** | 
+| Hola, necesito hacer un embarque de 3 contenedores en el mismo booking. ¿Cuánto me costaría el agenciamiento aduanal? | **Financiero** | 
+| Hola, requiero exportar 3 contenedores en un mismo booking desde Valencia hacia el puerto. Además, uno de ellos tiene una factura con 5 ítems de clasificación arancelaria compleja. ¿Cuánto me costaría el agenciamiento, la DUA y el transporte? ¿Puedo pagar en bolívares? | **Financiero** |
+| ¿Cuál es el costo del agenciamiento aduanal para el primer contenedor de un embarque? | **Financiero** |
+| Hola, cuanto sale un flete. | **Financiero** |
+| ¿Cuánto me sale el flete para mañana? Y otra cosa, ¿cómo hago con la inspección del precinto? | **Financiero**, **Auditor** |
+| ¿Qué documentos integran el 'Expediente Especial de Trazabilidad de Planta' en caso de una alerta antidrogas? | **Auditor** |
+| ¿Bajo qué jurisdicción aduanera opera exclusivamente DEPORCA? | **Bot** |
+| Hola, buenas tardes, necesito ayuda por favor. | **Bot** |
+| Hola | **Bot** |
+
+<br>
 
 ## 🗺️ Roadmap
 
@@ -141,13 +163,17 @@ Luego podrá ejecutar las respectivas interfaces del sistemas:
 - [ ] Gestión de colas de usuarios.
 - [ ] API REST (FastAPI).
 
----
+<br>
 
 ## 📜 Licencia
 
 Este proyecto se distribuye bajo la **Licencia MIT**. El contenido personal y la trayectoria profesional son propiedad intelectual de **José Azócar**.
 
+<br>
+
 ---
+
+<br>
 
 <div align="right">
     <strong>José Antonio Azócar Marcano</strong><br>
