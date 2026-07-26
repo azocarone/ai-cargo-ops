@@ -394,5 +394,5 @@ A continuación se muestra la salida esperada del modelo tras procesar la consul
     <strong>José Antonio Azócar Marcano</strong><br>
     Ing. Informático | Consultor I&O: Infraestructura y Ops.<br>
 
-⬆ [Up](#-planteamiento-del-sistema) / ↩ [Return](../README.md)    
+⬆ [Up](#-planteamiento-del-sistema) / ↩ [Return](../README.md#-planteamiento-del-sistema-resumen)    
 </div>
