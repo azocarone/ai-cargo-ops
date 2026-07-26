@@ -30,6 +30,7 @@ Agente diseñado mediante el procesamiento del lenguaje natural para optimizar y
 
 - 📐 [Planteamiento del Sistema](./docs/planteamiento_del_sistema.md)
 - 🛠️ [Desarrollo](#-desarrollo)
+- ✔️ [Tecnologías y Técnicas Empleadas](#️-tecnologías-y-técnicas-mpleadas)
 - 💻 [Instalación y Configuración](#-instalación-y-configuración)
 - ⚙️ [Variables de Entorno](#️-variables-de-entorno)
 - 🚀 [Ejecución](#-ejecución)
@@ -43,7 +44,7 @@ Agente diseñado mediante el procesamiento del lenguaje natural para optimizar y
 El desarrollo de un **sistema multi-agente** plantea la optimización de las consultas operativas y logísticas de la empresa portuaria **DEPORCA**. La arquitectura se basa en un **Agente Orquestador** que clasifica y redirige las solicitudes hacia tres especialistas: el **Agente Auditor**, el **Agente Financiero** y el **Agente Bot**. Cada uno opera bajo un esquema de **"fuente de verdad"**, utilizando manuales de normas y tarifarios oficiales para garantizar respuestas precisas y sin errores. Este enfoque permite segmentar tareas complejas, como la gestión de **incidentes de seguridad** o el cálculo de **costos de exportación**, asegurando la trazabilidad legal en cada interacción. Al separar las responsabilidades, el sistema mejora la **eficiencia operativa** y reduce significativamente el riesgo de proporcionar información incorrecta al usuario.
 
 <div align="right">
-    <p>🔗 <a href="./docs/planteamiento_del_sistema.md">Conoce la conceptualización completa del sistema.</a></p>
+    <p>🔗 <a href="./docs/planteamiento_del_sistema.md">Conoce más sobre la conceptualización del sistema.</a></p>
 </div>
 
 <br>
@@ -59,6 +60,48 @@ El desarrollo de un **sistema multi-agente** plantea la optimización de las con
 4. **Desarrollo de la Lógica (Cadenas base)**: Mediante el uso de **LangChain**, se diseñan los *prompts*, se configura la memoria a corto plazo y se generan los *embeddings* (vectorización de archivos PDF). Asimismo, se implementa la arquitectura **RAG** para habilitar la recuperación de información desde documentos locales, garantizando que el modelo base sus respuestas en los datos provistos.
 
 5. **Implementación del Agente (Flujos con Estado)**: La etapa final integra el sistema RAG construido en el paso anterior con **LangGraph** para establecer un sistema autónomo. Se diseña un flujo de trabajo cíclico que permite al agente evaluar la precisión de las respuestas obtenidas, determinar la necesidad de utilizar herramientas adicionales o ejecutar nuevas iteraciones de búsqueda en la base documental.
+
+<br>
+
+## ✔️ Tecnologías y Técnicas Empleadas
+
+### 1. Entorno de Desarrollo y Control de Versiones
+
+- **Tecnologías:** Git, GitHub, Python (entornos virtuales como `venv`).
+
+- **Técnicas:** Gestión de código fuente, licenciamiento *open-source* (Licencia MIT) y aislamiento de dependencias.
+
+### 2. Infraestructura e Integración de Modelos
+
+- **Tecnologías:** API de NVIDIA Build, Modelos de Lenguaje de Gran Escala (LLM).
+
+- **Técnicas:** Gestión segura de credenciales (API Keys y tokens) y validación de endpoints.
+
+### 3. Ingesta y Procesamiento de Documentos
+
+- **Tecnologías:** `PyMuPDF`.
+
+- **Técnicas:** Extracción y preprocesamiento de texto no estructurado desde archivos PDF (*ETL de datos base*).
+
+### 4. Arquitectura de Contexto e Inteligencia (RAG Base)
+
+- **Tecnologías:** `LangChain`, Vector Stores (bases de datos vectoriales).
+
+- **Técnicas:**
+
+    - **Ingeniería de Prompts:** Diseño de instrucciones base para guiar al modelo.
+
+    - **Embeddings & Vectorización:** Conversión de texto en vectores matemáticos.
+
+    - **RAG (*Retrieval-Augmented Generation*):** Recuperación de contexto Relevante desde documentos locales para mitigar alucinaciones.
+
+### 5. Orquestación y Agentes Autónomos con Estado
+
+- **Tecnologías:** `LangGraph`.
+
+- **Técnicas:**
+
+    - **Flujos con Estado (*Stateful Workflows*):** Control del flujo mediante grafos donde la información y el estado persisten entre nodos.
 
 <br>
 
@@ -137,6 +180,8 @@ Luego podrá ejecutar las respectivas interfaces del sistemas:
     streamlit run app_web.py  
     ```
 
+> También, puede 🔗 <a href="https://azocarone-ai-cargo-ops.streamlit.app/">ver la app en funcionamiento</a> en **Streamlit Community Cloud**.
+
 <br>
 
 ## Sección Base de Test al Sistema
@@ -159,8 +204,9 @@ Luego podrá ejecutar las respectivas interfaces del sistemas:
 
 ## 🗺️ Roadmap
 
-- [ ] Mejora de las interfaces de usuario (UI).
+- [ ] Manejo del historial conversacional a corto plazo (Gestión de Memoria).
 - [ ] Gestión de colas de usuarios.
+- [ ] Mejora de las interfaces de usuario (UI).
 - [ ] API REST (FastAPI).
 
 <br>
@@ -179,5 +225,5 @@ Este proyecto se distribuye bajo la **Licencia MIT**. El contenido personal y la
     <strong>José Antonio Azócar Marcano</strong><br>
     Ing. Informático | Consultor I&O: Infraestructura y Ops.<br>
 
-⬆ [Up](#-agente-de-ia-para-consultas-de-operaciones-y-logística-marítima)    
+⬆ [Up](#-agente-de-ia-para-consultas-de-operaciones-y-logística-marítima)
 </div>
