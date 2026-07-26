@@ -201,7 +201,7 @@ Luego podrá ejecutar las respectivas interfaces del sistemas:
 | Hola | **Bot** |
 
 <br>
-
+                                                                                            
 ## 🗺️ Roadmap
 
 - [ ] Manejo del historial conversacional a corto plazo (Gestión de Memoria).
@@ -221,16 +221,23 @@ Este proyecto se distribuye bajo la **Licencia MIT**. El contenido personal y la
 
 <br>
 
-<div style="display: flex; align-items: center; gap: 20px;">
-    <div>
-        <img src="./assets/img/azocarone.svg" alt="Logo azocarone - José Azócar" width="80px">
-    </div>
-    <div>
-        <img src="./assets/img/badge-rag-agente-ia.png" alt="Badge RAG Agente IA" width="100px">
-    </div>
-    <div align="right">
-        <strong>José Antonio Azócar Marcano</strong><br>
-        Ing. Informático | Consultor I&O: Infraestructura y Ops.<br>
-        <a href="#-agente-de-ia-para-consultas-de-operaciones-y-logística-marítima">⬆ Up</a>
-    </div>
+
+<div align="center">
+<table style="border: none; border-collapse: collapse; background: transparent;">
+<tr>
+<td style="border: none; vertical-align: middle; text-align: left; padding-right: 20px;">
+<div style="display: inline-block; vertical-align: middle; margin-right: 10px;">
+    <img src="./assets/img/azocarone.svg" alt="Logo azocarone - José Azócar" width="60px">
+</div>
+<div style="display: inline-block; vertical-align: middle;">
+    <img src="./assets/img/badge-rag-agente-ia.png" alt="Badge RAG Agente IA" width="90px">
+</div>
+</td>
+<td style="border: none; vertical-align: middle; text-align: right;">
+<strong>José Antonio Azócar Marcano</strong><br>
+Ing. Informático | Consultor I&O: Infraestructura y Ops.<br>
+⬆ <a href="#-agente-de-ia-para-consultas-de-operaciones-y-logística-marítima">Up</a>
+</td>
+</tr>
+</table>
 </div>
