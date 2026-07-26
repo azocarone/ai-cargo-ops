@@ -142,7 +142,7 @@ Luego podrá ejecutar las respectivas interfaces del sistemas:
 ## Sección Base de Test al Sistema
 
 | Preguntas | Agentes |
-|:---------|:-------|
+|:---------|:-------:|
 | ¿Qué pasa si un contenedor esta dañado? | **Auditor** | 
 | ¿Qué debe hacer el Agente de Aduanas si el funcionario del SENIAT tiene un criterio técnico con el que la empresa no está de acuerdo? | **Auditor** | 
 | Hola, necesito hacer un embarque de 3 contenedores en el mismo booking. ¿Cuánto me costaría el agenciamiento aduanal? | **Financiero** | 
