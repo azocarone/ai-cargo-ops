@@ -383,3 +383,16 @@ A continuación se muestra la salida esperada del modelo tras procesar la consul
 2. **Seguridad Operativa:** Como indica el manual, "cualquier manifestación verbal carece de validez legal". Un sistema multi-agente permite que la respuesta final sea validada por el **Agente Auditor** antes de mostrarse al usuario, asegurando que se cite siempre la base legal correcta (LOA, COT o LOD).
 
 3. **Flujos de Trabajo Complejos:** Permite resolver situaciones mixtas. Por ejemplo, ante una "Discrepancia de Peso" (Caso 6.1), el **Agente Auditor** dicta el protocolo de re-pesaje, mientras el **Agente Financiero** calcula automáticamente el costo de la "Enmienda de DUA" ($100 USD) según el tarifario.
+
+<br>
+
+---
+
+<br>
+
+<div align="right">
+    <strong>José Antonio Azócar Marcano</strong><br>
+    Ing. Informático | Consultor I&O: Infraestructura y Ops.<br>
+
+⬆ [Up](#-planteamiento-del-sistema) / ↩ [Return](../README.md)    
+</div>
