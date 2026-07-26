@@ -180,7 +180,7 @@ Luego podrá ejecutar las respectivas interfaces del sistemas:
     streamlit run app_web.py  
     ```
 
-> También, puede 🔗 <a href="https://azocarone-ai-cargo-ops.streamlit.app/">ver la app en funcionamiento</a> en **Streamlit Community Cloud**.
+> También, puede 🔗 <a href="https://azocarone-ai-cargo-ops.streamlit.app/">ver la versión Web en funcionamiento</a> en **Streamlit Community Cloud**.
 
 <br>
 
