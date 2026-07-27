@@ -225,7 +225,7 @@ Este proyecto se distribuye bajo la **Licencia MIT**. El contenido personal y la
 <tr>
 
 <td style="text-align: left; border: none; width: 20%">
-    <img src="./assets/img/badge-rag-agente-ia.png" alt="Descripción 2" width="50%" />
+    <img src="./assets/img/badge-rag-agente-ia.png" alt="Descripción 2" />
 </td>
 
 <td style="text-align: right; border: none; width: 70%">
@@ -238,7 +238,7 @@ Ing. Informático | Consultor I&O: Infraestructura y Ops.<br>
 </td>
 
 <td style="text-align: right; border: none; width: 10%" >
-    <img src="./assets/img/azocarone.svg" alt="Descripción 1" width="100%" />
+    <img src="./assets/img/azocarone.svg" alt="Descripción 1" />
 </td>
 </tr>
 </table>
