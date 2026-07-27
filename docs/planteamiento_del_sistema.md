@@ -396,3 +396,14 @@ A continuación se muestra la salida esperada del modelo tras procesar la consul
 
 ⬆ [Up](#-planteamiento-del-sistema) / ↩ [Return](../README.md#-planteamiento-del-sistema-resumen)    
 </div>
+
+<p align="center">
+  <img width="70px" src="../assets/img/badge-rag-agente-ia.png" align="left" alt="Badge RAG" />
+  <img width="40px" src="../assets/img/azocarone.svg" align="right" alt="Logo" />
+  <div align="right">
+    <strong>José Antonio Azócar Marcano</strong><br>
+    Ing. Informático | Consultor I&O: Infraestructura y Ops.<br>
+    ⬆ <a href="#-planteamiento-del-sistema">Up</a> / ↩ <a href="../README.md#-planteamiento-del-sistema-resumen">Up</a>
+  </div>
+  <br clear="all">
+</p>
