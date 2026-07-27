@@ -234,22 +234,15 @@ Este proyecto se distribuye bajo la **Licencia MIT**. El contenido personal y la
 </p>
 
 <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-  
-  <!-- Imagen izquierda -->
   <div>
     <img width="70px" src="./assets/img/badge-rag-agente-ia.png" alt="Badge RAG" style="display: block;" />
   </div>
-  
-  <!-- Texto central / derecho -->
   <div style="text-align: right;">
     <strong>José Antonio Azócar Marcano</strong><br>
     Ing. Informático | Consultor I&O: Infraestructura y Ops.<br>
     ⬆ <a href="#-agente-de-ia-para-consultas-de-operaciones-y-logística-marítima">Up</a>
   </div>
-  
-  <!-- Imagen derecha -->
   <div>
     <img width="40px" src="./assets/img/azocarone.svg" alt="Logo" style="display: block;" />
   </div>
-
 </div>
