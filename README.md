@@ -221,41 +221,35 @@ Este proyecto se distribuye bajo la **Licencia MIT**. El contenido personal y la
 
 <br>
 
-<div align="center">
-<table style="border: none; background: transparent;">
-<tr>
-<td style="border: none; text-align: left; vertical-align: middle; padding-right: 15px;">
-<img src="./assets/img/azocarone.svg" alt="Logo azocarone - José Azócar" width="10%" height="10%"><br>
-<img src="./assets/img/badge-rag-agente-ia.png" alt="Badge RAG Agente IA" width="15%" height="15%">
-</td>
-<td style="border: none; text-align: right; vertical-align: middle;">
+
+<table style="border: none; width: 100%;">
+  <tr>
+    <td style="text-align: center; border: none;">
+      <img src="./assets/img/azocarone.svg" alt="Descripción 1" width="25%" />
+    </td>
+    <td style="text-align: center; border: none;">
+      <img src="./assets/img/badge-rag-agente-ia.png" alt="Descripción 2" width="100%" />
+    </td>
+    <td style="text-align: center; border: none;">
+    <div align="right">
 <strong>José Antonio Azócar Marcano</strong><br>
 Ing. Informático | Consultor I&O: Infraestructura y Ops.<br>
-⬆ <a href="#-agente-de-ia-para-consultas-de-operaciones-y-logística-marítima">Up</a>
-</td>
-</tr>
+
+⬆ [Up](#-agente-de-ia-para-consultas-de-operaciones-y-logística-marítima)
+</div>
+</div>
+    </td>
+  </tr>
 </table>
-</div>
 
 
 
 
-<div align="center">
-<table style="border: none; border-collapse: collapse; background: transparent;">
-<tr>
-<td style="border: none; vertical-align: middle; text-align: left; padding-right: 20px;">
-<div style="display: inline-block; vertical-align: middle; margin-right: 10px;">
-    <img src="./assets/img/azocarone.svg" alt="Logo azocarone - José Azócar" width="60px">
-</div>
-<div style="display: inline-block; vertical-align: middle;">
-    <img src="./assets/img/badge-rag-agente-ia.png" alt="Badge RAG Agente IA" width="90px">
-</div>
-</td>
-<td style="border: none; vertical-align: middle; text-align: right;">
+
+<div align="right">
 <strong>José Antonio Azócar Marcano</strong><br>
 Ing. Informático | Consultor I&O: Infraestructura y Ops.<br>
-⬆ <a href="#-agente-de-ia-para-consultas-de-operaciones-y-logística-marítima">Up</a>
-</td>
-</tr>
-</table>
+
+⬆ [Up](#-agente-de-ia-para-consultas-de-operaciones-y-logística-marítima)
+</div>
 </div>
