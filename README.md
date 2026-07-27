@@ -221,23 +221,23 @@ Este proyecto se distribuye bajo la **Licencia MIT**. El contenido personal y la
 
 <br>
 
-<table style="border: none; width: 100%;">
-  <tr>
-    <td style="text-align: left; border: none; width: 20%; vertical-align: middle;">
-      <img src="./assets/img/badge-rag-agente-ia.png" alt="Badge RAG" width="60px" />
-    </td>
-    <td style="text-align: right; border: none; width: 70%; vertical-align: middle;">
-      <div>
+<p align="center">
+  <table width="100%" style="border: none; background: transparent;">
+    <tr>
+      <td align="left" width="20%" style="border: none; vertical-align: middle;">
+        <img src="./assets/img/badge-rag-agente-ia.png" alt="Badge RAG" width="70px" />
+      </td>
+      <td align="right" width="70%" style="border: none; vertical-align: middle;">
         <strong>José Antonio Azócar Marcano</strong><br>
         Ing. Informático | Consultor I&O: Infraestructura y Ops.<br>
         ⬆ <a href="#-agente-de-ia-para-consultas-de-operaciones-y-logística-marítima">Up</a>
-      </div>
-    </td>
-    <td style="text-align: right; border: none; width: 10%; vertical-align: middle;">
-      <img src="./assets/img/azocarone.svg" alt="Logo" width="40px" />
-    </td>
-  </tr>
-</table>
+      </td>
+      <td align="right" width="10%" style="border: none; vertical-align: middle;">
+        <img src="./assets/img/azocarone.svg" alt="Logo" width="40px" />
+      </td>
+    </tr>
+  </table>
+</p>
 
 
 
