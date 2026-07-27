@@ -232,3 +232,23 @@ Este proyecto se distribuye bajo la **Licencia MIT**. El contenido personal y la
   </div>
   <br clear="all">
 </p>
+
+<table style="width: 100%; border-collapse: collapse; border: none; background-color: transparent;">
+  <tr>
+    <td style="width: 20%; text-align: left; vertical-align: middle; border: none; padding: 0;">
+      <img src="./assets/img/badge-rag-agente-ia.png" alt="Descripción 2" style="max-width: 100%; height: auto; display: block;" />
+    </td>
+    <td style="width: 70%; text-align: right; vertical-align: middle; border: none; padding: 0 20px;">
+      <div style="line-height: 1.4;">
+        <span style="font-weight: bold; font-size: 1.1em;">José Antonio Azócar Marcano</span><br>
+        <span style="font-size: 0.9em; color: #555;">Ing. Informático | Consultor I&O: Infraestructura y Ops.</span><br>
+        <a href="#-agente-de-ia-para-consultas-de-operaciones-y-logística-marítima" style="text-decoration: none; color: #0366d6; font-size: 0.9em;">
+          ⬆ Up
+        </a>
+      </div>
+    </td>
+    <td style="width: 10%; text-align: right; vertical-align: middle; border: none; padding: 0;">
+      <img src="./assets/img/azocarone.svg" alt="Descripción 1" style="max-width: 100%; height: auto; display: block;" />
+    </td>
+  </tr>
+</table>
