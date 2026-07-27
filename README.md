@@ -224,7 +224,6 @@ Este proyecto se distribuye bajo la **Licencia MIT**. El contenido personal y la
 <p align="center">
   <img width="70px" src="./assets/img/badge-rag-agente-ia.png" align="left" alt="Badge RAG" />
   <img width="40px" src="./assets/img/azocarone.svg" align="right" alt="Logo" />
-  <br><br>
   <div align="right">
     <strong>José Antonio Azócar Marcano</strong><br>
     Ing. Informático | Consultor I&O: Infraestructura y Ops.<br>
