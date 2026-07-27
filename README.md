@@ -224,7 +224,7 @@ Este proyecto se distribuye bajo la **Licencia MIT**. El contenido personal y la
 <table style="border: none; width: 100%;">
   <tr>
     <td style="text-align: left; border: none; width: 20%; vertical-align: middle;">
-      <img src="./assets/img/badge-rag-agente-ia.png" alt="Badge RAG" width="100%" />
+      <img src="./assets/img/badge-rag-agente-ia.png" alt="Badge RAG" width="60px" />
     </td>
     <td style="text-align: right; border: none; width: 70%; vertical-align: middle;">
       <div>
@@ -234,11 +234,10 @@ Este proyecto se distribuye bajo la **Licencia MIT**. El contenido personal y la
       </div>
     </td>
     <td style="text-align: right; border: none; width: 10%; vertical-align: middle;">
-      <img src="./assets/img/azocarone.svg" alt="Logo" width="100%" />
+      <img src="./assets/img/azocarone.svg" alt="Logo" width="40px" />
     </td>
   </tr>
 </table>
-
 
 
 
