@@ -232,14 +232,3 @@ Este proyecto se distribuye bajo la **Licencia MIT**. El contenido personal y la
   </div>
   <br clear="all">
 </p>
-
-
-
-
-<div align="right">
-<strong>José Antonio Azócar Marcano</strong><br>
-Ing. Informático | Consultor I&O: Infraestructura y Ops.<br>
-
-⬆ [Up](#-agente-de-ia-para-consultas-de-operaciones-y-logística-marítima)
-</div>
-</div>
